@@ -172,3 +172,11 @@ data_process/
 
 batchscript-*
 results/
+
+*.npy
+*.pkl
+*.faiss
+*.png
+*.npz
+*.json
+*.txt
