@@ -14,11 +14,11 @@ Two clustering approaches are supported:
 
 1. **Two-stage clustering**: Hierarchical approach using FAISS spherical k-means for fine clustering (default: 1024 clusters), followed by balanced k-means for coarse clustering (default: 2 clusters).
 
-   ![Two-stage clustering t-SNE](kmeans_vit-base-patch-16_1024-fine_2-coarse/clustering_tsne_combined_clustering.png)
+   ![Two-stage clustering t-SNE](clustering/kmeans_vit-base-patch-16_1024-fine_2-coarse/clustering_tsne_combined_clustering.png)
 
 2. **Single-stage spherical k-means**: Direct balanced k-means clustering on CLIP features using cosine distance.
 
-   ![Single-stage clustering t-SNE](balanced-kmeans_vit-base-patch-16_2-coarse/clustering_tsne_clustering.png)
+   ![Single-stage clustering t-SNE](clustering/balanced-kmeans_vit-base-patch-16_2-coarse/clustering_tsne_clustering.png)
 
 ## Training Configuration
 
