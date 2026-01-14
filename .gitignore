@@ -177,6 +177,8 @@ results/
 *.pkl
 *.faiss
 *.png
+!clustering/kmeans_vit-base-patch-16_1024-fine_2-coarse/clustering_tsne_combined_clustering.png
+!clustering/balanced-kmeans_vit-base-patch-16_2-coarse/clustering_tsne_clustering.png
 *.npz
 *.json
 *.txt
