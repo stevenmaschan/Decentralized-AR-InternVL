@@ -20,7 +20,77 @@ ds_collections = {
         'metric': None,
         'max_new_tokens': 100,
         'min_new_tokens': 1,
-    }
+    },
+    'pope-cluster0': {
+        'root': 'data/pope/val2014',
+        'question': '../work_dirs/internvl_chat_v2_5/cluster4/pope_cluster_files/llava_pope_test_cluster0.jsonl',
+        'metric': None,
+        'max_new_tokens': 100,
+        'min_new_tokens': 1,
+    },
+    'pope-cluster1': {
+        'root': 'data/pope/val2014',
+        'question': 'data/pope/llava_pope_test_cluster1.jsonl',
+        'metric': None,
+        'max_new_tokens': 100,
+        'min_new_tokens': 1,
+    },
+    'pope-2experts-cluster0': {
+        'root': 'data/pope/val2014',
+        'question': 'data/pope/test_2experts/llava_pope_test_cluster0.jsonl',
+        'metric': None,
+        'max_new_tokens': 100,
+        'min_new_tokens': 1,
+    },
+    'pope-2experts-cluster1': {
+        'root': 'data/pope/val2014',
+        'question': 'data/pope/test_2experts/llava_pope_test_cluster1.jsonl',
+        'metric': None,
+        'max_new_tokens': 100,
+        'min_new_tokens': 1,
+    },
+    'pope-balanced-2experts-cluster0': {
+        'root': 'data/pope/val2014',
+        'question': 'data/pope/test_2experts_balanced/llava_pope_test_cluster0.jsonl',
+        'metric': None,
+        'max_new_tokens': 100,
+        'min_new_tokens': 1,
+    },
+    'pope-balanced-2experts-cluster1': {
+        'root': 'data/pope/val2014',
+        'question': 'data/pope/test_2experts_balanced/llava_pope_test_cluster1.jsonl',
+        'metric': None,
+        'max_new_tokens': 100,
+        'min_new_tokens': 1,
+    },
+    'pope-balanced-vitl14-2experts-cluster0': {
+        'root': 'data/pope/val2014',
+        'question': 'data/pope/test_2experts_balanced_vitl14/llava_pope_test_cluster0.jsonl',
+        'metric': None,
+        'max_new_tokens': 100,
+        'min_new_tokens': 1,
+    },
+    'pope-balanced-vitl14-2experts-cluster1': {
+        'root': 'data/pope/val2014',
+        'question': 'data/pope/test_2experts_balanced_vitl14/llava_pope_test_cluster1.jsonl',
+        'metric': None,
+        'max_new_tokens': 100,
+        'min_new_tokens': 1,
+    },
+    'pope-cluster2': {
+        'root': 'data/pope/val2014',
+        'question': '../work_dirs/internvl_chat_v2_5/cluster4/pope_cluster_files/llava_pope_test_cluster2.jsonl',
+        'metric': None,
+        'max_new_tokens': 100,
+        'min_new_tokens': 1,
+    },
+    'pope-cluster3': {
+        'root': 'data/pope/val2014',
+        'question': '../work_dirs/internvl_chat_v2_5/cluster4/pope_cluster_files/llava_pope_test_cluster3.jsonl',
+        'metric': None,
+        'max_new_tokens': 100,
+        'min_new_tokens': 1,
+    },
 }
 
 
@@ -195,9 +265,10 @@ def evaluate_chat_model():
             results_file = os.path.join(args.out_dir, results_file)
             json.dump(merged_outputs, open(results_file, 'w'))
             print('Results saved to {}'.format(results_file))
+            question_file = ds_collections[ds_name]['question']
             cmd = 'python eval/pope/eval_pope.py ' \
                   '--annotation-dir ./data/pope/coco ' \
-                  '--question-file ./data/pope/llava_pope_test.jsonl ' \
+                  '--question-file ' + question_file + ' ' \
                   '--result-file ' + results_file
             print(cmd)
             os.system(cmd)

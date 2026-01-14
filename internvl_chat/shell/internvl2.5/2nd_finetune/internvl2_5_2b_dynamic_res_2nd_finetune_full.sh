@@ -65,5 +65,5 @@ torchrun \
   --use_thumbnail True \
   --ps_version 'v2' \
   --deepspeed "zero_stage1_config.json" \
-  --report_to "tensorboard" \
+  --report_to "wandb" \
   2>&1 | tee -a "${OUTPUT_DIR}/training_log.txt"

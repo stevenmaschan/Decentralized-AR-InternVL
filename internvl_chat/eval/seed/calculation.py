@@ -4,7 +4,7 @@ import os
 
 argparse = argparse.ArgumentParser()
 argparse.add_argument('--image_result_file', type=str, default='')
-argparse.add_argument('--anno_path', type=str, default='data/SEED/SEED-Bench.json')
+argparse.add_argument('--anno_path', type=str, default='data/SEED/seed.jsonl')
 
 args = argparse.parse_args()
 image_result_file = args.image_result_file

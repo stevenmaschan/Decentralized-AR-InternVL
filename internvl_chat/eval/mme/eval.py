@@ -35,6 +35,8 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--checkpoint', type=str, default='')
     parser.add_argument('--root', type=str, default='./Your_Results')
+    parser.add_argument('--images-dir', type=str, default='../../data/mme/MME_Benchmark_release_version',
+                        help='Directory containing MME images (default: original MME directory)')
     parser.add_argument('--num-beams', type=int, default=1)
     parser.add_argument('--top-k', type=int, default=50)
     parser.add_argument('--top-p', type=float, default=0.9)
@@ -74,7 +76,7 @@ if __name__ == '__main__':
         for line in tqdm(lines):
             img, question, gt = line.strip().split('\t')
             question = question + ' ' + prompt
-            img_path = os.path.join('../../data/mme/MME_Benchmark_release_version', filename, img)
+            img_path = os.path.join(args.images_dir, filename, img)
             assert os.path.exists(img_path), img_path
             pixel_values = load_image(img_path, image_size).cuda().to(torch.bfloat16)
             generation_config = dict(

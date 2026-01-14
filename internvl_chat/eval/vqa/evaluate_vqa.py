@@ -30,6 +30,103 @@ ds_collections = {
         'metric': None,
         'max_new_tokens': 10,
     },
+    'vqav2_val_2experts_cluster0': {
+        'train': 'data/vqav2/vqav2_train.jsonl',
+        'test': 'data/vqav2/val_2experts/vqav2_val_cluster0.jsonl',
+        'question': 'data/vqav2/v2_OpenEnded_mscoco_val2014_questions.json',
+        'annotation': 'data/vqav2/v2_mscoco_val2014_annotations.json',
+        'metric': 'vqa_score',
+        'max_new_tokens': 10,
+    },
+    'vqav2_val_2experts_cluster1': {
+        'train': 'data/vqav2/vqav2_train.jsonl',
+        'test': 'data/vqav2/val_2experts/vqav2_val_cluster1.jsonl',
+        'question': 'data/vqav2/v2_OpenEnded_mscoco_val2014_questions.json',
+        'annotation': 'data/vqav2/v2_mscoco_val2014_annotations.json',
+        'metric': 'vqa_score',
+        'max_new_tokens': 10,
+    },
+    'vqav2_val_balanced_2experts_cluster0': {
+        'train': 'data/vqav2/vqav2_train.jsonl',
+        'test': 'data/vqav2/val_2experts_balanced/vqav2_val_cluster0.jsonl',
+        'question': 'data/vqav2/v2_OpenEnded_mscoco_val2014_questions.json',
+        'annotation': 'data/vqav2/v2_mscoco_val2014_annotations.json',
+        'metric': 'vqa_score',
+        'max_new_tokens': 10,
+    },
+    'vqav2_val_balanced_2experts_cluster1': {
+        'train': 'data/vqav2/vqav2_train.jsonl',
+        'test': 'data/vqav2/val_2experts_balanced/vqav2_val_cluster1.jsonl',
+        'question': 'data/vqav2/v2_OpenEnded_mscoco_val2014_questions.json',
+        'annotation': 'data/vqav2/v2_mscoco_val2014_annotations.json',
+        'metric': 'vqa_score',
+        'max_new_tokens': 10,
+    },
+    'vqav2_val_balanced_vitl14_2experts_cluster0': {
+        'train': 'data/vqav2/vqav2_train.jsonl',
+        'test': 'data/vqav2/val_2experts_balanced_vitl14/vqav2_val_cluster0.jsonl',
+        'question': 'data/vqav2/v2_OpenEnded_mscoco_val2014_questions.json',
+        'annotation': 'data/vqav2/v2_mscoco_val2014_annotations.json',
+        'metric': 'vqa_score',
+        'max_new_tokens': 10,
+    },
+    'vqav2_val_balanced_vitl14_2experts_cluster1': {
+        'train': 'data/vqav2/vqav2_train.jsonl',
+        'test': 'data/vqav2/val_2experts_balanced_vitl14/vqav2_val_cluster1.jsonl',
+        'question': 'data/vqav2/v2_OpenEnded_mscoco_val2014_questions.json',
+        'annotation': 'data/vqav2/v2_mscoco_val2014_annotations.json',
+        'metric': 'vqa_score',
+        'max_new_tokens': 10,
+    },
+    'vqav2_val_balanced_vitb16_2experts_cluster0': {
+        'train': 'data/vqav2/vqav2_train.jsonl',
+        'test': 'data/vqav2/val_2experts_balanced_vitb16/vqav2_val_cluster0.jsonl',
+        'question': 'data/vqav2/v2_OpenEnded_mscoco_val2014_questions.json',
+        'annotation': 'data/vqav2/v2_mscoco_val2014_annotations.json',
+        'metric': 'vqa_score',
+        'max_new_tokens': 10,
+    },
+    'vqav2_val_balanced_vitb16_2experts_cluster1': {
+        'train': 'data/vqav2/vqav2_train.jsonl',
+        'test': 'data/vqav2/val_2experts_balanced_vitb16/vqav2_val_cluster1.jsonl',
+        'question': 'data/vqav2/v2_OpenEnded_mscoco_val2014_questions.json',
+        'annotation': 'data/vqav2/v2_mscoco_val2014_annotations.json',
+        'metric': 'vqa_score',
+        'max_new_tokens': 10,
+    },
+    'vqav2_val_balanced_vitb16_4experts_cluster0': {
+        'train': 'data/vqav2/vqav2_train.jsonl',
+        'test': 'data/vqav2/val_4experts_balanced_vitb16/vqav2_val_cluster0.jsonl',
+        'question': 'data/vqav2/v2_OpenEnded_mscoco_val2014_questions.json',
+        'annotation': 'data/vqav2/v2_mscoco_val2014_annotations.json',
+        'metric': 'vqa_score',
+        'max_new_tokens': 10,
+    },
+    'vqav2_val_balanced_vitb16_4experts_cluster1': {
+        'train': 'data/vqav2/vqav2_train.jsonl',
+        'test': 'data/vqav2/val_4experts_balanced_vitb16/vqav2_val_cluster1.jsonl',
+        'question': 'data/vqav2/v2_OpenEnded_mscoco_val2014_questions.json',
+        'annotation': 'data/vqav2/v2_mscoco_val2014_annotations.json',
+        'metric': 'vqa_score',
+        'max_new_tokens': 10,
+    },
+    'vqav2_val_balanced_vitb16_4experts_cluster2': {
+        'train': 'data/vqav2/vqav2_train.jsonl',
+        'test': 'data/vqav2/val_4experts_balanced_vitb16/vqav2_val_cluster2.jsonl',
+        'question': 'data/vqav2/v2_OpenEnded_mscoco_val2014_questions.json',
+        'annotation': 'data/vqav2/v2_mscoco_val2014_annotations.json',
+        'metric': 'vqa_score',
+        'max_new_tokens': 10,
+    },
+    'vqav2_val_balanced_vitb16_4experts_cluster3': {
+        'train': 'data/vqav2/vqav2_train.jsonl',
+        'test': 'data/vqav2/val_4experts_balanced_vitb16/vqav2_val_cluster3.jsonl',
+        'question': 'data/vqav2/v2_OpenEnded_mscoco_val2014_questions.json',
+        'annotation': 'data/vqav2/v2_mscoco_val2014_annotations.json',
+        'metric': 'vqa_score',
+        'max_new_tokens': 10,
+    },
+
     'okvqa_val': {
         'train': 'data/okvqa/okvqa_train.jsonl',
         'test': 'data/okvqa/okvqa_val.jsonl',
@@ -38,9 +135,105 @@ ds_collections = {
         'metric': 'vqa_score',
         'max_new_tokens': 10,
     },
+    'okvqa_val_2experts_cluster0': {
+        'train': 'data/okvqa/okvqa_train.jsonl',
+        'test': 'data/okvqa/val_2experts/okvqa_val_cluster0.jsonl',
+        'question': 'data/okvqa/OpenEnded_mscoco_val2014_questions.json',
+        'annotation': 'data/okvqa/mscoco_val2014_annotations.json',
+        'metric': 'vqa_score',
+        'max_new_tokens': 10,
+    },
+    'okvqa_val_2experts_cluster1': {
+        'train': 'data/okvqa/okvqa_train.jsonl',
+        'test': 'data/okvqa/val_2experts/okvqa_val_cluster1.jsonl',
+        'question': 'data/okvqa/OpenEnded_mscoco_val2014_questions.json',
+        'annotation': 'data/okvqa/mscoco_val2014_annotations.json',
+        'metric': 'vqa_score',
+        'max_new_tokens': 10,
+    },
     'textvqa_val': {
         'train': 'data/textvqa/textvqa_train.jsonl',
         'test': 'data/textvqa/textvqa_val.jsonl',
+        'question': 'data/textvqa/textvqa_val_questions.json',
+        'annotation': 'data/textvqa/textvqa_val_annotations.json',
+        'metric': 'vqa_score',
+        'max_new_tokens': 10,
+    },
+    'textvqa_val_2experts_cluster0': {
+        'train': 'data/textvqa/textvqa_train.jsonl',
+        'test': 'data/textvqa/val_2experts/textvqa_val_cluster0.jsonl',
+        'question': 'data/textvqa/textvqa_val_questions.json',
+        'annotation': 'data/textvqa/textvqa_val_annotations.json',
+        'metric': 'vqa_score',
+        'max_new_tokens': 10,
+    },
+    'textvqa_val_2experts_cluster1': {
+        'train': 'data/textvqa/textvqa_train.jsonl',
+        'test': 'data/textvqa/val_2experts/textvqa_val_cluster1.jsonl',
+        'question': 'data/textvqa/textvqa_val_questions.json',
+        'annotation': 'data/textvqa/textvqa_val_annotations.json',
+        'metric': 'vqa_score',
+        'max_new_tokens': 10,
+    },
+    'textvqa_val_balanced_2experts_cluster0': {
+        'train': 'data/textvqa/textvqa_train.jsonl',
+        'test': 'data/textvqa/val_2experts_balanced/textvqa_val_cluster0.jsonl',
+        'question': 'data/textvqa/textvqa_val_questions.json',
+        'annotation': 'data/textvqa/textvqa_val_annotations.json',
+        'metric': 'vqa_score',
+        'max_new_tokens': 10,
+    },
+    'textvqa_val_balanced_2experts_cluster1': {
+        'train': 'data/textvqa/textvqa_train.jsonl',
+        'test': 'data/textvqa/val_2experts_balanced/textvqa_val_cluster1.jsonl',
+        'question': 'data/textvqa/textvqa_val_questions.json',
+        'annotation': 'data/textvqa/textvqa_val_annotations.json',
+        'metric': 'vqa_score',
+        'max_new_tokens': 10,
+    },
+    'textvqa_val_balanced_vitl14_2experts_cluster0': {
+        'train': 'data/textvqa/textvqa_train.jsonl',
+        'test': 'data/textvqa/val_2experts_balanced_vitl14/textvqa_val_cluster0.jsonl',
+        'question': 'data/textvqa/textvqa_val_questions.json',
+        'annotation': 'data/textvqa/textvqa_val_annotations.json',
+        'metric': 'vqa_score',
+        'max_new_tokens': 10,
+    },
+    'textvqa_val_balanced_vitl14_2experts_cluster1': {
+        'train': 'data/textvqa/textvqa_train.jsonl',
+        'test': 'data/textvqa/val_2experts_balanced_vitl14/textvqa_val_cluster1.jsonl',
+        'question': 'data/textvqa/textvqa_val_questions.json',
+        'annotation': 'data/textvqa/textvqa_val_annotations.json',
+        'metric': 'vqa_score',
+        'max_new_tokens': 10,
+    },
+    'textvqa_val_balanced_vitb16_4experts_cluster0': {
+        'train': 'data/textvqa/textvqa_train.jsonl',
+        'test': 'data/textvqa/val_4experts_balanced_vitb16/textvqa_val_cluster0.jsonl',
+        'question': 'data/textvqa/textvqa_val_questions.json',
+        'annotation': 'data/textvqa/textvqa_val_annotations.json',
+        'metric': 'vqa_score',
+        'max_new_tokens': 10,
+    },
+    'textvqa_val_balanced_vitb16_4experts_cluster1': {
+        'train': 'data/textvqa/textvqa_train.jsonl',
+        'test': 'data/textvqa/val_4experts_balanced_vitb16/textvqa_val_cluster1.jsonl',
+        'question': 'data/textvqa/textvqa_val_questions.json',
+        'annotation': 'data/textvqa/textvqa_val_annotations.json',
+        'metric': 'vqa_score',
+        'max_new_tokens': 10,
+    },
+    'textvqa_val_balanced_vitb16_4experts_cluster2': {
+        'train': 'data/textvqa/textvqa_train.jsonl',
+        'test': 'data/textvqa/val_4experts_balanced_vitb16/textvqa_val_cluster2.jsonl',
+        'question': 'data/textvqa/textvqa_val_questions.json',
+        'annotation': 'data/textvqa/textvqa_val_annotations.json',
+        'metric': 'vqa_score',
+        'max_new_tokens': 10,
+    },
+    'textvqa_val_balanced_vitb16_4experts_cluster3': {
+        'train': 'data/textvqa/textvqa_train.jsonl',
+        'test': 'data/textvqa/val_4experts_balanced_vitb16/textvqa_val_cluster3.jsonl',
         'question': 'data/textvqa/textvqa_val_questions.json',
         'annotation': 'data/textvqa/textvqa_val_annotations.json',
         'metric': 'vqa_score',
@@ -75,6 +268,48 @@ ds_collections = {
         'metric': 'anls',
         'max_new_tokens': 100,
     },
+    'docvqa_val_2experts_cluster0': {
+        'train': 'data/docvqa/train.jsonl',
+        'test': 'data/docvqa/val_2experts/docvqa_val_cluster0.jsonl',
+        'annotation': 'data/docvqa/val/val_v1.0.json',
+        'metric': 'anls',
+        'max_new_tokens': 100,
+    },
+    'docvqa_val_2experts_cluster1': {
+        'train': 'data/docvqa/train.jsonl',
+        'test': 'data/docvqa/val_2experts/docvqa_val_cluster1.jsonl',
+        'annotation': 'data/docvqa/val/val_v1.0.json',
+        'metric': 'anls',
+        'max_new_tokens': 100,
+    },
+    'docvqa_val_balanced_2experts_cluster0': {
+        'train': 'data/docvqa/train.jsonl',
+        'test': 'data/docvqa/val_2experts_balanced/docvqa_val_cluster0.jsonl',
+        'annotation': 'data/docvqa/val/val_v1.0.json',
+        'metric': 'anls',
+        'max_new_tokens': 100,
+    },
+    'docvqa_val_balanced_2experts_cluster1': {
+        'train': 'data/docvqa/train.jsonl',
+        'test': 'data/docvqa/val_2experts_balanced/docvqa_val_cluster1.jsonl',
+        'annotation': 'data/docvqa/val/val_v1.0.json',
+        'metric': 'anls',
+        'max_new_tokens': 100,
+    },
+    'docvqa_val_balanced_vitl14_2experts_cluster0': {
+        'train': 'data/docvqa/train.jsonl',
+        'test': 'data/docvqa/val_2experts_balanced_vitl14/docvqa_val_cluster0.jsonl',
+        'annotation': 'data/docvqa/val/val_v1.0.json',
+        'metric': 'anls',
+        'max_new_tokens': 100,
+    },
+    'docvqa_val_balanced_vitl14_2experts_cluster1': {
+        'train': 'data/docvqa/train.jsonl',
+        'test': 'data/docvqa/val_2experts_balanced_vitl14/docvqa_val_cluster1.jsonl',
+        'annotation': 'data/docvqa/val/val_v1.0.json',
+        'metric': 'anls',
+        'max_new_tokens': 100,
+    },
     'docvqa_test': {
         'train': 'data/docvqa/train.jsonl',
         'test': 'data/docvqa/test.jsonl',
@@ -87,21 +322,117 @@ ds_collections = {
         'metric': 'relaxed_accuracy',
         'max_new_tokens': 100,
     },
+    'chartqa_test_human_2experts_cluster0': {
+        'train': 'data/chartqa/train_human.jsonl',
+        'test': 'data/chartqa/test_human_2experts/chartqa_test_human_cluster0.jsonl',
+        'metric': 'relaxed_accuracy',
+        'max_new_tokens': 100,
+    },
+    'chartqa_test_human_2experts_cluster1': {
+        'train': 'data/chartqa/train_human.jsonl',
+        'test': 'data/chartqa/test_human_2experts/chartqa_test_human_cluster1.jsonl',
+        'metric': 'relaxed_accuracy',
+        'max_new_tokens': 100,
+    },
+    'chartqa_test_human_balanced_2experts_cluster0': {
+        'train': 'data/chartqa/train_human.jsonl',
+        'test': 'data/chartqa/test_human_2experts_balanced/chartqa_test_human_cluster0.jsonl',
+        'metric': 'relaxed_accuracy',
+        'max_new_tokens': 100,
+    },
+    'chartqa_test_human_balanced_2experts_cluster1': {
+        'train': 'data/chartqa/train_human.jsonl',
+        'test': 'data/chartqa/test_human_2experts_balanced/chartqa_test_human_cluster1.jsonl',
+        'metric': 'relaxed_accuracy',
+        'max_new_tokens': 100,
+    },
     'chartqa_test_augmented': {
         'train': 'data/chartqa/train_augmented.jsonl',
         'test': 'data/chartqa/test_augmented.jsonl',
         'metric': 'relaxed_accuracy',
         'max_new_tokens': 100,
     },
+    'chartqa_test_augmented_2experts_cluster0': {
+        'train': 'data/chartqa/train_augmented.jsonl',
+        'test': 'data/chartqa/test_augmented_2experts/chartqa_test_augmented_cluster0.jsonl',
+        'metric': 'relaxed_accuracy',
+        'max_new_tokens': 100,
+    },
+    'chartqa_test_augmented_2experts_cluster1': {
+        'train': 'data/chartqa/train_augmented.jsonl',
+        'test': 'data/chartqa/test_augmented_2experts/chartqa_test_augmented_cluster1.jsonl',
+        'metric': 'relaxed_accuracy',
+        'max_new_tokens': 100,
+    },
+    'chartqa_test_augmented_balanced_2experts_cluster0': {
+        'train': 'data/chartqa/train_augmented.jsonl',
+        'test': 'data/chartqa/test_augmented_2experts_balanced/chartqa_test_augmented_cluster0.jsonl',
+        'metric': 'relaxed_accuracy',
+        'max_new_tokens': 100,
+    },
+    'chartqa_test_augmented_balanced_2experts_cluster1': {
+        'train': 'data/chartqa/train_augmented.jsonl',
+        'test': 'data/chartqa/test_augmented_2experts_balanced/chartqa_test_augmented_cluster1.jsonl',
+        'metric': 'relaxed_accuracy',
+        'max_new_tokens': 100,
+    },
+    'chartqa_test_human_balanced_vitl14_2experts_cluster0': {
+        'train': 'data/chartqa/train_human.jsonl',
+        'test': 'data/chartqa/test_human_2experts_balanced_vitl14/chartqa_test_human_cluster0.jsonl',
+        'metric': 'relaxed_accuracy',
+        'max_new_tokens': 100,
+    },
+    'chartqa_test_human_balanced_vitl14_2experts_cluster1': {
+        'train': 'data/chartqa/train_human.jsonl',
+        'test': 'data/chartqa/test_human_2experts_balanced_vitl14/chartqa_test_human_cluster1.jsonl',
+        'metric': 'relaxed_accuracy',
+        'max_new_tokens': 100,
+    },
+    'chartqa_test_augmented_balanced_vitl14_2experts_cluster0': {
+        'train': 'data/chartqa/train_augmented.jsonl',
+        'test': 'data/chartqa/test_augmented_2experts_balanced_vitl14/chartqa_test_augmented_cluster0.jsonl',
+        'metric': 'relaxed_accuracy',
+        'max_new_tokens': 100,
+    },
+    'chartqa_test_augmented_balanced_vitl14_2experts_cluster1': {
+        'train': 'data/chartqa/train_augmented.jsonl',
+        'test': 'data/chartqa/test_augmented_2experts_balanced_vitl14/chartqa_test_augmented_cluster1.jsonl',
+        'metric': 'relaxed_accuracy',
+        'max_new_tokens': 100,
+    },
     'gqa_testdev': {
         'train': 'data/gqa/train.jsonl',
-        'test': 'data/gqa/test_balanced.jsonl',
+        'test': 'data/gqa/testdev_balanced.jsonl',
         'metric': 'accuracy',
         'max_new_tokens': 10,
     },
     'gqa_testdev_llava': {
         'train': 'data/gqa/train.jsonl',
         'test': 'data/gqa/llava_gqa_testdev_balanced_qwen_format.jsonl',
+        'metric': 'accuracy',
+        'max_new_tokens': 10,
+    },
+    'gqa_testdev_2experts_cluster0': {
+        'train': 'data/gqa/train_balanced.jsonl',
+        'test': 'data/gqa/testdev_balanced_2experts/gqa_testdev_balanced_cluster0.jsonl',
+        'metric': 'accuracy',
+        'max_new_tokens': 10,
+    },
+    'gqa_testdev_2experts_cluster1': {
+        'train': 'data/gqa/train_balanced.jsonl',
+        'test': 'data/gqa/testdev_balanced_2experts/gqa_testdev_balanced_cluster1.jsonl',
+        'metric': 'accuracy',
+        'max_new_tokens': 10,
+    },
+    'gqa_testdev_balanced_vitl14_2experts_cluster0': {
+        'train': 'data/gqa/train_balanced.jsonl',
+        'test': 'data/gqa/testdev_balanced_2experts_vitl14/gqa_testdev_cluster0.jsonl',
+        'metric': 'accuracy',
+        'max_new_tokens': 10,
+    },
+    'gqa_testdev_balanced_vitl14_2experts_cluster1': {
+        'train': 'data/gqa/train_balanced.jsonl',
+        'test': 'data/gqa/testdev_balanced_2experts_vitl14/gqa_testdev_cluster1.jsonl',
         'metric': 'accuracy',
         'max_new_tokens': 10,
     },
@@ -123,9 +454,75 @@ ds_collections = {
         'metric': 'accuracy',
         'max_new_tokens': 10,
     },
+    'ai2diagram_test_balanced_2experts_cluster0': {
+        'train': 'data/ai2diagram/train.jsonl',
+        'test': 'data/ai2diagram/test_2experts_balanced/ai2d_test_cluster0.jsonl',
+        'metric': 'accuracy',
+        'max_new_tokens': 10,
+    },
+    'ai2diagram_test_balanced_2experts_cluster1': {
+        'train': 'data/ai2diagram/train.jsonl',
+        'test': 'data/ai2diagram/test_2experts_balanced/ai2d_test_cluster1.jsonl',
+        'metric': 'accuracy',
+        'max_new_tokens': 10,
+    },
+    'ai2diagram_test_balanced_vitl14_2experts_cluster0': {
+        'train': 'data/ai2diagram/train.jsonl',
+        'test': 'data/ai2diagram/test_2experts_balanced_vitl14/ai2d_test_cluster0.jsonl',
+        'metric': 'accuracy',
+        'max_new_tokens': 10,
+    },
+    'ai2diagram_test_balanced_vitl14_2experts_cluster1': {
+        'train': 'data/ai2diagram/train.jsonl',
+        'test': 'data/ai2diagram/test_2experts_balanced_vitl14/ai2d_test_cluster1.jsonl',
+        'metric': 'accuracy',
+        'max_new_tokens': 10,
+    },
     'infographicsvqa_val': {
         'train': 'data/infographicsvqa/train.jsonl',
         'test': 'data/infographicsvqa/val.jsonl',
+        'annotation': 'data/infographicsvqa/infographicsVQA_val_v1.0_withQT.json',
+        'metric': 'anls',
+        'max_new_tokens': 100,
+    },
+    'infographicsvqa_val_2experts_cluster0': {
+        'train': 'data/infographicsvqa/train.jsonl',
+        'test': 'data/infographicsvqa/val_2experts/infovqa_val_cluster0.jsonl',
+        'annotation': 'data/infographicsvqa/infographicsVQA_val_v1.0_withQT.json',
+        'metric': 'anls',
+        'max_new_tokens': 100,
+    },
+    'infographicsvqa_val_2experts_cluster1': {
+        'train': 'data/infographicsvqa/train.jsonl',
+        'test': 'data/infographicsvqa/val_2experts/infovqa_val_cluster1.jsonl',
+        'annotation': 'data/infographicsvqa/infographicsVQA_val_v1.0_withQT.json',
+        'metric': 'anls',
+        'max_new_tokens': 100,
+    },
+    'infographicsvqa_val_balanced_2experts_cluster0': {
+        'train': 'data/infographicsvqa/train.jsonl',
+        'test': 'data/infographicsvqa/val_2experts_balanced/infovqa_val_cluster0.jsonl',
+        'annotation': 'data/infographicsvqa/infographicsVQA_val_v1.0_withQT.json',
+        'metric': 'anls',
+        'max_new_tokens': 100,
+    },
+    'infographicsvqa_val_balanced_2experts_cluster1': {
+        'train': 'data/infographicsvqa/train.jsonl',
+        'test': 'data/infographicsvqa/val_2experts_balanced/infovqa_val_cluster1.jsonl',
+        'annotation': 'data/infographicsvqa/infographicsVQA_val_v1.0_withQT.json',
+        'metric': 'anls',
+        'max_new_tokens': 100,
+    },
+    'infographicsvqa_val_balanced_vitl14_2experts_cluster0': {
+        'train': 'data/infographicsvqa/train.jsonl',
+        'test': 'data/infographicsvqa/val_2experts_balanced_vitl14/infovqa_val_cluster0.jsonl',
+        'annotation': 'data/infographicsvqa/infographicsVQA_val_v1.0_withQT.json',
+        'metric': 'anls',
+        'max_new_tokens': 100,
+    },
+    'infographicsvqa_val_balanced_vitl14_2experts_cluster1': {
+        'train': 'data/infographicsvqa/train.jsonl',
+        'test': 'data/infographicsvqa/val_2experts_balanced_vitl14/infovqa_val_cluster1.jsonl',
         'annotation': 'data/infographicsvqa/infographicsVQA_val_v1.0_withQT.json',
         'metric': 'anls',
         'max_new_tokens': 100,
@@ -373,29 +770,29 @@ def evaluate_chat_model():
             answers = [pred]
 
             for question, question_id, answer, annotation in zip(questions, question_ids, answers, annotations):
-                if ds_name in ['vqav2_val', 'vqav2_testdev', 'okvqa_val', 'textvqa_val',
+                if ds_name in ['vqav2_val', 'vqav2_val_2experts_cluster0', 'vqav2_val_2experts_cluster1', 'vqav2_val_balanced_2experts_cluster0', 'vqav2_val_balanced_2experts_cluster1', 'vqav2_val_balanced_vitl14_2experts_cluster0', 'vqav2_val_balanced_vitl14_2experts_cluster1', 'vqav2_val_balanced_vitb16_2experts_cluster0', 'vqav2_val_balanced_vitb16_2experts_cluster1', 'vqav2_val_balanced_vitb16_4experts_cluster0', 'vqav2_val_balanced_vitb16_4experts_cluster1', 'vqav2_val_balanced_vitb16_4experts_cluster2', 'vqav2_val_balanced_vitb16_4experts_cluster3', 'vqav2_testdev', 'okvqa_val', 'okvqa_val_2experts_cluster0', 'okvqa_val_2experts_cluster1', 'textvqa_val', 'textvqa_val_2experts_cluster0', 'textvqa_val_2experts_cluster1', 'textvqa_val_balanced_2experts_cluster0', 'textvqa_val_balanced_2experts_cluster1', 'textvqa_val_balanced_vitl14_2experts_cluster0', 'textvqa_val_balanced_vitl14_2experts_cluster1', 'textvqa_val_balanced_vitb16_4experts_cluster0', 'textvqa_val_balanced_vitb16_4experts_cluster1', 'textvqa_val_balanced_vitb16_4experts_cluster2', 'textvqa_val_balanced_vitb16_4experts_cluster3',
                                'vizwiz_val', 'textvqa_val_ocr']:
                     outputs.append({
                         'question': question,
                         'question_id': question_id,
                         'answer': answer,
                     })
-                elif ds_name in ['docvqa_val', 'infographicsvqa_val', 'gqa_testdev', 'ocrvqa_val',
-                                 'ocrvqa_test', 'gqa_testdev_llava', 'infographicsvqa_test',]:
+                elif ds_name in ['docvqa_val', 'docvqa_val_2experts_cluster0', 'docvqa_val_2experts_cluster1', 'docvqa_val_balanced_2experts_cluster0', 'docvqa_val_balanced_2experts_cluster1', 'docvqa_val_balanced_vitl14_2experts_cluster0', 'docvqa_val_balanced_vitl14_2experts_cluster1', 'infographicsvqa_val', 'infographicsvqa_val_2experts_cluster0', 'infographicsvqa_val_2experts_cluster1', 'infographicsvqa_val_balanced_2experts_cluster0', 'infographicsvqa_val_balanced_2experts_cluster1', 'infographicsvqa_val_balanced_vitl14_2experts_cluster0', 'infographicsvqa_val_balanced_vitl14_2experts_cluster1', 'gqa_testdev', 'gqa_testdev_2experts_cluster0', 'gqa_testdev_2experts_cluster1', 'gqa_testdev_balanced_vitl14_2experts_cluster0', 'gqa_testdev_balanced_vitl14_2experts_cluster1', 'ocrvqa_val', 'chartqa_test_human', 'chartqa_test_human_2experts_cluster0', 'chartqa_test_human_2experts_cluster1', 'chartqa_test_human_balanced_2experts_cluster0', 'chartqa_test_human_balanced_2experts_cluster1', 'chartqa_test_human_balanced_vitl14_2experts_cluster0', 'chartqa_test_human_balanced_vitl14_2experts_cluster1', 'chartqa_test_augmented', 'chartqa_test_augmented_2experts_cluster0', 'chartqa_test_augmented_2experts_cluster1', 'chartqa_test_augmented_balanced_2experts_cluster0', 'chartqa_test_augmented_balanced_2experts_cluster1', 'chartqa_test_augmented_balanced_vitl14_2experts_cluster0', 'chartqa_test_augmented_balanced_vitl14_2experts_cluster1',
+                               'ocrvqa_test', 'gqa_testdev_llava', 'infographicsvqa_test',]:
                     outputs.append({
                         'question': question,
                         'questionId': question_id,
                         'answer': answer,
                         'annotation': annotation,
                     })
-                elif ds_name in ['ai2diagram_test']:
+                elif ds_name in ['ai2diagram_test', 'ai2diagram_test_balanced_2experts_cluster0', 'ai2diagram_test_balanced_2experts_cluster1', 'ai2diagram_test_balanced_vitl14_2experts_cluster0', 'ai2diagram_test_balanced_vitl14_2experts_cluster1']:
                     outputs.append({
                         'question': question,
                         'image': question_id,
                         'answer': answer,
                         'annotation': annotation,
                     })
-                elif ds_name in ['chartqa_test_human', 'chartqa_test_augmented']:
+                elif ds_name in ['chartqa_test_human', 'chartqa_test_human_2experts_cluster0', 'chartqa_test_human_2experts_cluster1', 'chartqa_test_human_balanced_2experts_cluster0', 'chartqa_test_human_balanced_2experts_cluster1', 'chartqa_test_human_balanced_vitl14_2experts_cluster0', 'chartqa_test_human_balanced_vitl14_2experts_cluster1', 'chartqa_test_augmented', 'chartqa_test_augmented_2experts_cluster0', 'chartqa_test_augmented_2experts_cluster1', 'chartqa_test_augmented_balanced_2experts_cluster0', 'chartqa_test_augmented_balanced_2experts_cluster1', 'chartqa_test_augmented_balanced_vitl14_2experts_cluster0', 'chartqa_test_augmented_balanced_vitl14_2experts_cluster1']:
                     outputs.append({
                         'question': question,
                         'answer': answer,
@@ -450,11 +847,35 @@ def evaluate_chat_model():
                 json.dump(merged_outputs,
                           open(results_file, 'w'),
                           ensure_ascii=False)
+                # For cluster-specific datasets, filter the ground truth
+                gt_file = ds_collections[ds_name]['annotation']
+                if 'cluster' in ds_name:
+                    # Get question IDs from the cluster test file
+                    cluster_test_file = ds_collections[ds_name]['test']
+                    cluster_question_ids = set()
+                    with open(cluster_test_file, 'r') as f:
+                        for line in f:
+                            data = json.loads(line.strip())
+                            cluster_question_ids.add(int(data['question_id']))
+                    
+                    # Filter ground truth to only include cluster questions
+                    with open(gt_file, 'r') as f:
+                        gt_data = json.load(f)
+                    filtered_gt_data = {
+                        'dataset_name': gt_data['dataset_name'],
+                        'data': [item for item in gt_data['data'] if int(item['questionId']) in cluster_question_ids]
+                    }
+                    
+                    # Create temporary filtered ground truth file
+                    filtered_gt_file = results_file.replace('.json', '_filtered_gt.json')
+                    json.dump(filtered_gt_data, open(filtered_gt_file, 'w'))
+                    gt_file = filtered_gt_file
+                
                 print('python eval/vqa/infographicsvqa_eval.py -g ' +
-                      ds_collections[ds_name]['annotation'] + ' -s ' +
+                      gt_file + ' -s ' +
                       results_file)
                 os.system('python eval/vqa/infographicsvqa_eval.py -g ' +
-                          ds_collections[ds_name]['annotation'] + ' -s ' +
+                          gt_file + ' -s ' +
                           results_file)
             elif ds_collections[ds_name]['metric'] == 'relaxed_accuracy':
                 relaxed_accuracy = evaluate_relaxed_accuracy(merged_outputs)
@@ -522,6 +943,8 @@ if __name__ == '__main__':
     torch.cuda.set_device(int(os.getenv('LOCAL_RANK', 0)))
 
     model, tokenizer = load_model_and_tokenizer(args)
+    # Remove Chinese system prompt for evaluation
+    model.system_message = ''
     image_size = model.config.force_image_size or model.config.vision_config.image_size
     use_thumbnail = model.config.use_thumbnail
 
@@ -537,3 +960,5 @@ if __name__ == '__main__':
     print(f'[test] use_thumbnail: {use_thumbnail}')
 
     evaluate_chat_model()
+
+    torch.distributed.barrier()

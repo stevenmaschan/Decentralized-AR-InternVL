@@ -19,6 +19,56 @@ ds_collections = {
         'max_new_tokens': 100,
         'min_new_tokens': 1,
     },
+    'sqa_test_cluster0': {
+        'root': '../work_dirs/internvl_chat_v2_5/cluster4/scienceqa_cluster_files/scienceqa_test_cluster0.jsonl',
+        'max_new_tokens': 100,
+        'min_new_tokens': 1,
+    },
+    'sqa_test_cluster1': {
+        'root': '../work_dirs/internvl_chat_v2_5/cluster4/scienceqa_cluster_files/scienceqa_test_cluster1.jsonl',
+        'max_new_tokens': 100,
+        'min_new_tokens': 1,
+    },
+    'sqa_test_2experts_cluster0': {
+        'root': 'data/scienceqa/test_2experts/scienceqa_test_cluster0.jsonl',
+        'max_new_tokens': 100,
+        'min_new_tokens': 1,
+    },
+    'sqa_test_2experts_cluster1': {
+        'root': 'data/scienceqa/test_2experts/scienceqa_test_cluster1.jsonl',
+        'max_new_tokens': 100,
+        'min_new_tokens': 1,
+    },
+    'sqa_test_balanced_2experts_cluster0': {
+        'root': 'data/scienceqa/test_2experts_balanced/scienceqa_test_cluster0.jsonl',
+        'max_new_tokens': 100,
+        'min_new_tokens': 1,
+    },
+    'sqa_test_balanced_2experts_cluster1': {
+        'root': 'data/scienceqa/test_2experts_balanced/scienceqa_test_cluster1.jsonl',
+        'max_new_tokens': 100,
+        'min_new_tokens': 1,
+    },
+    'sqa_test_balanced_vitl14_2experts_cluster0': {
+        'root': 'data/scienceqa/test_2experts_balanced_vitl14/scienceqa_test_cluster0.jsonl',
+        'max_new_tokens': 100,
+        'min_new_tokens': 1,
+    },
+    'sqa_test_balanced_vitl14_2experts_cluster1': {
+        'root': 'data/scienceqa/test_2experts_balanced_vitl14/scienceqa_test_cluster1.jsonl',
+        'max_new_tokens': 100,
+        'min_new_tokens': 1,
+    },
+    'sqa_test_cluster2': {
+        'root': '../work_dirs/internvl_chat_v2_5/cluster4/scienceqa_cluster_files/scienceqa_test_cluster2.jsonl',
+        'max_new_tokens': 100,
+        'min_new_tokens': 1,
+    },
+    'sqa_test_cluster3': {
+        'root': '../work_dirs/internvl_chat_v2_5/cluster4/scienceqa_cluster_files/scienceqa_test_cluster3.jsonl',
+        'max_new_tokens': 100,
+        'min_new_tokens': 1,
+    },
     'm3cot_test': {
         'root': 'data/M3CoT/test.jsonl',
         'max_new_tokens': 100,

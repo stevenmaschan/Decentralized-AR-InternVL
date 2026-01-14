@@ -51,7 +51,7 @@ torchrun --nproc_per_node=8 eval/mmbench/evaluate_mmbench.py --checkpoint ${CHEC
 # Test the MMBench-Test-EN
 torchrun --nproc_per_node=8 eval/mmbench/evaluate_mmbench.py --checkpoint ${CHECKPOINT} --dynamic --datasets mmbench_test_en_20231003
 # Test the MMBench-Dev-CN
-torchrun --nproc_per_node=8 eval/mmbench/evaluate_mmbench.py --checkpoint ${CHECKPOINT} --dynamic --datasets mmbench_dev_cn_20231003
+torchrun --nproc_per_node=8 eval/mmbench/evaluate_lsmmbench.py --checkpoint ${CHECKPOINT} --dynamic --datasets mmbench_dev_cn_20231003
 # Test the MMBench-Test-CN
 torchrun --nproc_per_node=8 eval/mmbench/evaluate_mmbench.py --checkpoint ${CHECKPOINT} --dynamic --datasets mmbench_test_cn_20231003
 # Test the CCBench-Dev

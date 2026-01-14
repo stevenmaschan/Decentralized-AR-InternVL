@@ -385,7 +385,7 @@ GPUS=8 sh evaluate.sh ${CHECKPOINT} vqa-vizwiz-test --dynamic
 # Test GQA testdev
 GPUS=8 sh evaluate.sh ${CHECKPOINT} vqa-gqa-testdev --dynamic
 # Test AI2D test
-GPUS=8 sh evaluate.sh ${CHECKPOINT} vqa-ai2d-test --dynamic
+GPUS=4 sh evaluate.sh ${CHECKPOINT} vqa-ai2d-test --dynamic
 # Test TextVQA val
 GPUS=8 sh evaluate.sh ${CHECKPOINT} vqa-textvqa-val --dynamic
 # Test ChartQA test-human & test-augmented

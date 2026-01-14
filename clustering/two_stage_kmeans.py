@@ -20,8 +20,41 @@ import numpy as np
 import torch
 import pickle
 import matplotlib.pyplot as plt
-from openTSNE import TSNE
 from tqdm import tqdm
+
+# Try to import CUDA-accelerated t-SNE libraries in order of preference
+TSNE_IMPL = None
+TSNE_LIBRARY = None
+
+# Try cuML first (more reliable installation)
+try:
+    from cuml.manifold import TSNE
+    TSNE_IMPL = TSNE
+    TSNE_LIBRARY = "cuml"
+    print("Using RAPIDS cuML for GPU-accelerated t-SNE")
+except (ImportError, OSError):
+    # Try tsnecuda as fallback
+    try:
+        from tsnecuda import TSNE
+        TSNE_IMPL = TSNE
+        TSNE_LIBRARY = "tsnecuda"
+        print("Using tsnecuda for GPU-accelerated t-SNE")
+    except (ImportError, OSError):
+        try:
+            from openTSNE import TSNE
+            TSNE_IMPL = TSNE
+            TSNE_LIBRARY = "openTSNE"
+            print("Warning: GPU t-SNE not available, using openTSNE (CPU) instead")
+        except ImportError:
+            try:
+                from sklearn.manifold import TSNE
+                TSNE_IMPL = TSNE
+                TSNE_LIBRARY = "sklearn"
+                print("Warning: GPU t-SNE not available, using sklearn.manifold.TSNE (CPU) instead")
+            except ImportError:
+                print("Error: No t-SNE implementation available.")
+                print("Please install one of: tsnecuda, cuml, openTSNE, or scikit-learn")
+                sys.exit(1)
 
 try:
     import faiss
@@ -367,37 +400,109 @@ def plot_tsne_clustering(
         sample_indices = np.random.choice(N, n_samples, replace=False)
         sampled_features = features[sample_indices]
         sampled_fine_assignments = fine_assignments[sample_indices]
+        n_samples_used = n_samples
         print(f"Sampled {n_samples} points from {N} total points for t-SNE visualization")
     else:
         sampled_features = features
         sampled_fine_assignments = fine_assignments
         sample_indices = np.arange(N)
+        n_samples_used = N
         print(f"Using all {N} points for t-SNE visualization")
     
     # Normalize features before t-SNE (to match clustering which uses normalized features)
     sampled_features_normalized = normalize_features(sampled_features)
     
-    # Combine sampled features and fine centroids for t-SNE
-    # This ensures centroids are in the same space as the points
-    # Note: fine_centroids are already normalized from spherical k-means
-    combined_features = np.vstack([sampled_features_normalized, fine_centroids])
+    print(f"\nApplying t-SNE to {len(sampled_features_normalized)} points (samples only)...")
+    print(f"Using {TSNE_LIBRARY} implementation")
     
-    print(f"\nApplying t-SNE to {len(combined_features)} points (samples + fine centroids)...")
-    tsne = TSNE(
-        n_components=2,
-        perplexity=min(perplexity, len(combined_features) - 1),  # Perplexity must be < n_samples
-        random_state=random_state,
-        n_iter=1000,
-        metric="cosine",
-        verbose=True
-    )
-    tsne_embedding = tsne.fit(combined_features)
-    tsne_coords = np.array(tsne_embedding)
+    # Use appropriate t-SNE implementation based on what's available
+    if TSNE_LIBRARY == "tsnecuda":
+        # tsnecuda uses different parameter names
+        tsne = TSNE_IMPL(
+            n_components=2,
+            perplexity=min(perplexity, len(sampled_features_normalized) - 1),
+            learning_rate=200,
+            n_iter=1000,
+            verbose=1
+        )
+        tsne_coords = tsne.fit_transform(sampled_features_normalized.astype(np.float32))
+    elif TSNE_LIBRARY == "cuml":
+        # RAPIDS cuML TSNE
+        print("Warning: cuML TSNE may not work well with cosine distance.")
+        print("Attempting cuML TSNE with adjusted parameters...")
+        
+        import cupy as cp
+        try:
+            # Convert to cupy array
+            sampled_features_gpu = cp.asarray(sampled_features_normalized.astype(np.float32))
+            
+            # Adjust perplexity to be safe (cuML recommends < n_samples/3)
+            max_perplexity = min((len(sampled_features_normalized) - 1) // 3, 50)
+            safe_perplexity = min(perplexity, max_perplexity)
+            
+            if safe_perplexity < 5:
+                safe_perplexity = 5  # Minimum perplexity
+            
+            print(f"Using perplexity={safe_perplexity} (adjusted from {perplexity})")
+            
+            # Use same parameters for both fine and coarse plots (single t-SNE computation)
+            tsne = TSNE_IMPL(
+                n_components=2,
+                perplexity=safe_perplexity,
+                learning_rate=200,
+                n_iter=1000,
+                random_state=random_state,
+                verbose=True,
+                method='barnes_hut'
+            )
+            tsne_coords_gpu = tsne.fit_transform(sampled_features_gpu)
+            # Convert back to numpy
+            tsne_coords = cp.asnumpy(tsne_coords_gpu)
+            
+            # Check if results look reasonable (not all zeros or NaN)
+            if np.any(np.isnan(tsne_coords)) or np.allclose(tsne_coords, 0):
+                raise ValueError("cuML TSNE produced invalid results (all zeros or NaN)")
+                
+        except Exception as e:
+            print(f"Warning: cuML TSNE failed or produced poor results: {e}")
+            print("Falling back to openTSNE (better for cosine distance)...")
+            # Fallback to openTSNE
+            from openTSNE import TSNE as openTSNE_impl
+            tsne = openTSNE_impl(
+                n_components=2,
+                perplexity=min(perplexity, len(sampled_features_normalized) - 1),
+                random_state=random_state,
+                n_iter=1000,
+                metric="cosine",
+                verbose=True
+            )
+            tsne_embedding = tsne.fit(sampled_features_normalized)
+            tsne_coords = np.array(tsne_embedding)
+    elif TSNE_LIBRARY == "openTSNE":
+        # openTSNE
+        tsne = TSNE_IMPL(
+            n_components=2,
+            perplexity=min(perplexity, len(sampled_features_normalized) - 1),
+            random_state=random_state,
+            n_iter=1000,
+            metric="cosine",
+            verbose=True
+        )
+        tsne_embedding = tsne.fit(sampled_features_normalized)
+        tsne_coords = np.array(tsne_embedding)
+    else:
+        # sklearn TSNE (doesn't support metric="cosine" directly, uses euclidean)
+        tsne = TSNE_IMPL(
+            n_components=2,
+            perplexity=min(perplexity, len(sampled_features_normalized) - 1),
+            random_state=random_state,
+            n_iter=1000,
+            verbose=1
+        )
+        tsne_coords = tsne.fit_transform(sampled_features_normalized)
     
-    # Split back into samples and centroids
-    n_sampled = len(sampled_features)
-    sample_coords = tsne_coords[:n_sampled]
-    fine_centroid_coords = tsne_coords[n_sampled:]
+    # Use all coordinates as sample coordinates (no centroids)
+    sample_coords = tsne_coords
     
     # Get coarse assignments for sampled points
     sampled_coarse_assignments = fine_to_coarse[fine_assignments[sample_indices]]
@@ -425,10 +530,10 @@ def plot_tsne_clustering(
             sample_coords[mask, 1],
             c=[colors_fine[color_idx]],
             alpha=0.6,
-            s=3
+            s=1
         )
     
-    ax1.set_title(f'Fine Clustering (t-SNE)\n{n_samples} samples, {len(fine_centroids)} fine clusters', 
+    ax1.set_title(f'Fine Clustering (t-SNE)\n{n_samples_used} samples, {len(fine_centroids)} fine clusters', 
                   fontsize=14, fontweight='bold')
     ax1.set_xlabel('t-SNE Component 1', fontsize=12)
     ax1.set_ylabel('t-SNE Component 2', fontsize=12)
@@ -454,26 +559,10 @@ def plot_tsne_clustering(
             c=[colors_coarse[color_idx]],
             label=f'Coarse Cluster {coarse_cluster}',
             alpha=0.6,
-            s=3
+            s=1
         )
     
-    # Plot fine centroids as stars, colored by their coarse cluster assignment
-    for fine_idx, coarse_cluster in enumerate(fine_to_coarse):
-        coarse_color_idx = np.where(unique_coarse == coarse_cluster)[0][0]
-        color_idx = coarse_color_idx % len(colors_coarse)
-        ax2.scatter(
-            fine_centroid_coords[fine_idx, 0],
-            fine_centroid_coords[fine_idx, 1],
-            marker='*',
-            s=100,
-            c=[colors_coarse[color_idx]],
-            edgecolors='black',
-            linewidths=1.0,
-            zorder=10
-        )
-    
-    ax2.set_title(f'Coarse Clustering (t-SNE)\n{n_samples} samples, {len(coarse_centroids)} coarse clusters\n'
-                  f'Fine centroids marked as stars', 
+    ax2.set_title(f'Coarse Clustering (t-SNE)\n{n_samples_used} samples, {len(coarse_centroids)} coarse clusters', 
                   fontsize=14, fontweight='bold')
     ax2.set_xlabel('t-SNE Component 1', fontsize=12)
     ax2.set_ylabel('t-SNE Component 2', fontsize=12)
@@ -503,7 +592,7 @@ def main():
         '--output-dir',
         type=str,
         default=None,
-        help='Output directory for saving results (default: same as input file directory)'
+        help='Output directory name (will be created in clustering/ folder). If not specified, uses "clustering_results"'
     )
     parser.add_argument(
         '--n-fine-clusters',
@@ -578,9 +667,22 @@ def main():
     if features.shape[1] != 768:
         print(f"Warning: Expected feature dimension 768, got {features.shape[1]}")
     
-    # Set output directory
+    # Set output directory - create a directory in clustering/ folder
+    # Get the clustering directory (parent of this script)
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    clustering_dir = script_dir
+    
     if args.output_dir is None:
-        args.output_dir = os.path.dirname(args.input_file) or '.'
+        output_dir_name = "clustering_results"
+    else:
+        output_dir_name = args.output_dir
+    
+    # Create the full path in clustering/ folder
+    args.output_dir = os.path.join(clustering_dir, output_dir_name)
+    
+    # Create output directory if it doesn't exist
+    os.makedirs(args.output_dir, exist_ok=True)
+    print(f"Output directory: {args.output_dir}")
     
     # Perform two-stage k-means
     fine_centroids, fine_assignments, coarse_centroids, fine_to_coarse, fine_kmeans_model, coarse_kmeans_model = two_stage_kmeans(

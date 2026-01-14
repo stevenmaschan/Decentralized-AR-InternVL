@@ -93,6 +93,9 @@ class calculate_metrics:
             for task_name in task_name_list:
 
                 task_txt = os.path.join(results_dir, task_name + '.txt')
+                if not os.path.exists(task_txt):
+                    print(f'\t {task_name} file not found, skipping...')
+                    continue
                 lines = open(task_txt, 'r').readlines()
                 chunk_lines = list(self.divide_chunks(lines)) # one image corresponds to two questions
 

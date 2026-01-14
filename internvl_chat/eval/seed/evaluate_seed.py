@@ -19,6 +19,18 @@ ds_collections = {
         'max_new_tokens': 100,
         'min_new_tokens': 1,
     },
+    'SEEDv1_cluster0': {
+        'root': 'data/SEED/',
+        'annotation': 'data/SEED/seed_cluster0.jsonl',
+        'max_new_tokens': 100,
+        'min_new_tokens': 1,
+    },
+    'SEEDv1_cluster1': {
+        'root': 'data/SEED/',
+        'annotation': 'data/SEED/seed_cluster1.jsonl',
+        'max_new_tokens': 100,
+        'min_new_tokens': 1,
+    },
 }
 
 
@@ -35,7 +47,10 @@ class MultipleChoiceDataset(torch.utils.data.Dataset):
     def __init__(self, root, annotation, input_size=224, dynamic_image_size=False,
                  use_thumbnail=False, max_num=6):
         f = open(annotation, 'r', encoding='utf-8')
-        self.data = [json.loads(line) for line in f.readlines()]
+        all_data = [json.loads(line) for line in f.readlines()]
+        # Filter out video entries - SEED-Image evaluation only uses image tasks
+        # Video entries reference non-existent directories (SEED-Bench-old-video-image-*)
+        self.data = [item for item in all_data if 'old-video' not in item.get('image', '')]
         self.root = root
         self.input_size = input_size
         self.dynamic_image_size = dynamic_image_size
