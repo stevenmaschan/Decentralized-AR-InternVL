@@ -234,19 +234,31 @@ def plot_tsne_clustering(
                 
         except Exception as e:
             print(f"Warning: cuML TSNE failed or produced poor results: {e}")
-            print("Falling back to openTSNE (better for cosine distance)...")
-            # Fallback to openTSNE
-            from openTSNE import TSNE as openTSNE_impl
-            tsne = openTSNE_impl(
-                n_components=2,
-                perplexity=min(perplexity, len(sampled_features_normalized) - 1),
-                random_state=random_state,
-                n_iter=1000,
-                metric="cosine",
-                verbose=True
-            )
-            tsne_embedding = tsne.fit(sampled_features_normalized)
-            sample_coords = np.array(tsne_embedding)
+            try:
+                print("Falling back to openTSNE (better for cosine distance)...")
+                from openTSNE import TSNE as openTSNE_impl
+                tsne = openTSNE_impl(
+                    n_components=2,
+                    perplexity=min(perplexity, len(sampled_features_normalized) - 1),
+                    random_state=random_state,
+                    n_iter=1000,
+                    metric="cosine",
+                    verbose=True
+                )
+                tsne_embedding = tsne.fit(sampled_features_normalized)
+                sample_coords = np.array(tsne_embedding)
+            except ImportError:
+                print("openTSNE not found, falling back to sklearn.manifold.TSNE (CPU; may be slow for large N)...")
+                from sklearn.manifold import TSNE as sklearn_tsne
+                tsne = sklearn_tsne(
+                    n_components=2,
+                    perplexity=min(perplexity, len(sampled_features_normalized) - 1),
+                    random_state=random_state,
+                    max_iter=1000,
+                    n_jobs=-1,
+                    verbose=1,
+                )
+                sample_coords = tsne.fit_transform(sampled_features_normalized)
     elif TSNE_LIBRARY == "tsnecuda":
         # tsnecuda
         tsne = TSNE(
@@ -279,6 +291,27 @@ def plot_tsne_clustering(
             verbose=1
         )
         sample_coords = tsne.fit_transform(sampled_features_normalized)
+    
+    # Ensure finite; exclude outliers by percentile so main cloud is visible (same as plot_tsne.py)
+    sample_coords = np.nan_to_num(sample_coords, nan=0.0, posinf=0.0, neginf=0.0)
+    p_low, p_high = 1.0, 99.0
+    x_lo, x_hi = np.percentile(sample_coords[:, 0], [p_low, p_high])
+    y_lo, y_hi = np.percentile(sample_coords[:, 1], [p_low, p_high])
+    inlier = (
+        (sample_coords[:, 0] >= x_lo) & (sample_coords[:, 0] <= x_hi) &
+        (sample_coords[:, 1] >= y_lo) & (sample_coords[:, 1] <= y_hi)
+    )
+    n_out = np.sum(~inlier)
+    if n_out > 0:
+        print(f"Excluding {n_out} outlier(s) (outside {p_low}-{p_high} percentiles on both axes) for plotting.")
+        sample_coords = sample_coords[inlier]
+        sampled_assignments = sampled_assignments[inlier]
+    # Scale to a nice plot range
+    for ax_id in [0, 1]:
+        c_min, c_max = sample_coords[:, ax_id].min(), sample_coords[:, ax_id].max()
+        half = max((c_max - c_min) / 2.0, 1e-10)
+        center = (c_max + c_min) / 2.0
+        sample_coords[:, ax_id] = (sample_coords[:, ax_id] - center) * (50.0 / half)
     
     # Create figure with subplots
     fig, ax = plt.subplots(1, 1, figsize=(12, 10))
