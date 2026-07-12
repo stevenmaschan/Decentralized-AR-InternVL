@@ -87,31 +87,45 @@ def normalize_features(features):
 def balanced_kmeans_clustering(features, n_clusters, device='cuda:0', iter_limit=100, verbose=True):
     """
     Perform balanced k-means clustering on features using cosine distance (spherical k-means).
-    
+
+    The global mean of the features is subtracted before L2-normalization. Raw CLIP
+    features are anisotropic and share a large common component, so they occupy a narrow
+    cone on the unit sphere; centering removes that shared component so cosine distances
+    reflect genuine semantic variation and clusters are better separated.
+
     Args:
         features: numpy array of shape (N, D) - input features
         n_clusters: number of clusters
         device: device to use for balanced k-means (default: 'cuda:0')
         iter_limit: maximum number of iterations (default: 100)
         verbose: whether to print progress
-    
+
     Returns:
         centroids: numpy array of shape (n_clusters, D) - cluster centroids
+            (in the mean-subtracted, L2-normalized space)
         assignments: numpy array of shape (N,) - cluster assignments
         kmeans_model: KMeans model object from balanced-kmeans
+        mean_vector: numpy array of shape (D,) - global mean subtracted from the features
     """
     if verbose:
         print(f"Running balanced k-means with {n_clusters} clusters on {len(features)} samples...")
-    
+
     # Set random seeds for reproducibility
     np.random.seed(42)
     torch.manual_seed(42)
     if torch.cuda.is_available():
         torch.cuda.manual_seed_all(42)
-    
+
+    # Subtract the global mean so cosine distances are not dominated by the shared
+    # (anisotropic) component of the CLIP features, then normalize for spherical k-means.
+    mean_vector = features.mean(axis=0)
+    features_centered = features - mean_vector
+    if verbose:
+        print(f"Subtracted global mean (||mean|| = {np.linalg.norm(mean_vector):.4f}) before normalization")
+
     # Normalize features for cosine distance (spherical k-means)
-    features_normalized = normalize_features(features)
-    
+    features_normalized = normalize_features(features_centered)
+
     # Convert to torch tensor
     features_tensor = torch.from_numpy(features_normalized).float()
     
@@ -144,8 +158,8 @@ def balanced_kmeans_clustering(features, n_clusters, device='cuda:0', iter_limit
         print(f"Clustering complete. Centroids shape: {centroids.shape}")
         cluster_sizes = np.bincount(assignments, minlength=n_clusters)
         print(f"Cluster sizes: min={cluster_sizes.min()}, max={cluster_sizes.max()}, mean={cluster_sizes.mean():.1f}")
-    
-    return centroids, assignments, kmeans
+
+    return centroids, assignments, kmeans, mean_vector
 
 
 def plot_tsne_clustering(
@@ -156,11 +170,12 @@ def plot_tsne_clustering(
     prefix="clustering",
     n_samples=5000,
     perplexity=30,
-    random_state=42
+    random_state=42,
+    mean_vector=None
 ):
     """
     Plot t-SNE visualization of clustering results.
-    
+
     Args:
         features: numpy array of shape (N, D) - original features
         assignments: numpy array of shape (N,) - cluster assignments
@@ -170,6 +185,8 @@ def plot_tsne_clustering(
         n_samples: number of samples to use for t-SNE (default: 5000)
         perplexity: perplexity parameter for t-SNE (default: 30)
         random_state: random state for reproducibility
+        mean_vector: optional global mean (D,) subtracted from features before
+            normalization, so the visualization matches the clustering space
     """
     if TSNE_IMPL is None:
         print("Warning: t-SNE not available, skipping visualization")
@@ -190,7 +207,9 @@ def plot_tsne_clustering(
         sample_indices = np.arange(N)
         print(f"Using all {N} points for t-SNE visualization")
     
-    # Normalize features for t-SNE
+    # Subtract the same global mean used for clustering, then normalize for t-SNE
+    if mean_vector is not None:
+        sampled_features = sampled_features - mean_vector
     sampled_features_normalized = normalize_features(sampled_features)
     
     # Run t-SNE
@@ -219,7 +238,7 @@ def plot_tsne_clustering(
                 n_components=2,
                 perplexity=safe_perplexity,
                 learning_rate=200,
-                n_iter=1000,
+                max_iter=1000,  # cuML renamed n_iter -> max_iter
                 random_state=random_state,
                 verbose=True,
                 method='barnes_hut'
@@ -292,25 +311,15 @@ def plot_tsne_clustering(
         )
         sample_coords = tsne.fit_transform(sampled_features_normalized)
     
-    # Ensure finite; exclude outliers by percentile so main cloud is visible (same as plot_tsne.py)
+    # Ensure finite. Plot ALL points (no outlier exclusion) so every example is shown.
     sample_coords = np.nan_to_num(sample_coords, nan=0.0, posinf=0.0, neginf=0.0)
-    p_low, p_high = 1.0, 99.0
-    x_lo, x_hi = np.percentile(sample_coords[:, 0], [p_low, p_high])
-    y_lo, y_hi = np.percentile(sample_coords[:, 1], [p_low, p_high])
-    inlier = (
-        (sample_coords[:, 0] >= x_lo) & (sample_coords[:, 0] <= x_hi) &
-        (sample_coords[:, 1] >= y_lo) & (sample_coords[:, 1] <= y_hi)
-    )
-    n_out = np.sum(~inlier)
-    if n_out > 0:
-        print(f"Excluding {n_out} outlier(s) (outside {p_low}-{p_high} percentiles on both axes) for plotting.")
-        sample_coords = sample_coords[inlier]
-        sampled_assignments = sampled_assignments[inlier]
-    # Scale to a nice plot range
+    # Scale to a nice plot range using robust (percentile) center/half so the main
+    # cloud fills the view, while still scattering every point (tails may fall
+    # slightly outside +/-50 but are not dropped).
     for ax_id in [0, 1]:
-        c_min, c_max = sample_coords[:, ax_id].min(), sample_coords[:, ax_id].max()
-        half = max((c_max - c_min) / 2.0, 1e-10)
-        center = (c_max + c_min) / 2.0
+        c_lo, c_hi = np.percentile(sample_coords[:, ax_id], [1.0, 99.0])
+        half = max((c_hi - c_lo) / 2.0, 1e-10)
+        center = (c_hi + c_lo) / 2.0
         sample_coords[:, ax_id] = (sample_coords[:, ax_id] - center) * (50.0 / half)
     
     # Create figure with subplots
@@ -426,7 +435,7 @@ def main():
     print(f"Output directory: {output_dir}")
     
     # Run balanced k-means clustering
-    centroids, assignments, kmeans_model = balanced_kmeans_clustering(
+    centroids, assignments, kmeans_model, mean_vector = balanced_kmeans_clustering(
         features,
         n_clusters=args.n_clusters,
         device=args.device,
@@ -441,6 +450,13 @@ def main():
     centroids_file = output_dir / f"{prefix}_centroids.npy"
     np.save(centroids_file, centroids)
     print(f"Saved centroids to {centroids_file}")
+
+    # Save the global mean subtracted before clustering. Centroids live in the
+    # mean-subtracted, L2-normalized space, so any downstream code that measures
+    # cosine similarity to these centroids MUST subtract this same mean first.
+    mean_file = output_dir / f"{prefix}_global_mean.npy"
+    np.save(mean_file, mean_vector)
+    print(f"Saved global mean to {mean_file}")
     
     # Save assignments
     assignments_file = output_dir / f"{prefix}_assignments.npy"
@@ -463,6 +479,9 @@ def main():
         'cluster_sizes': np.bincount(assignments, minlength=args.n_clusters).tolist(),
         'clustering_method': 'single-stage spherical balanced k-means',
         'distance_metric': 'cosine',
+        'mean_subtracted': True,
+        'mean_norm': float(np.linalg.norm(mean_vector)),
+        'mean_file': mean_file.name,
     }
     
     metadata_file = output_dir / f"{prefix}_metadata.json"
@@ -480,7 +499,8 @@ def main():
             prefix=prefix,
             n_samples=args.n_tsne_samples,
             perplexity=args.tsne_perplexity,
-            random_state=42
+            random_state=42,
+            mean_vector=mean_vector
         )
     
     print(f"\nClustering complete! Results saved to {output_dir}")

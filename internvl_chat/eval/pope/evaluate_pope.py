@@ -114,11 +114,12 @@ def extract_answer(text):
 
 def collate_fn(batches, tokenizer):
     pixel_values = torch.cat([_['pixel_values'] for _ in batches], dim=0)
+    num_patches_list = [_['pixel_values'].size(0) for _ in batches]
     questions = [_['question'] for _ in batches]
     question_ids = [_['question_id'] for _ in batches]
     annotations = [_['annotation'] for _ in batches]
 
-    return pixel_values, questions, question_ids, annotations
+    return pixel_values, questions, question_ids, annotations, num_patches_list
 
 
 class VQADataset(torch.utils.data.Dataset):
@@ -216,7 +217,7 @@ def evaluate_chat_model():
         )
 
         outputs = []
-        for _, (pixel_values, questions, question_ids, annotations) in tqdm(enumerate(dataloader)):
+        for _, (pixel_values, questions, question_ids, annotations, num_patches_list) in tqdm(enumerate(dataloader)):
             if args.cot:
                 questions = [COT_INSTRUCTION.format(question=q) for q in questions]
 
@@ -228,23 +229,26 @@ def evaluate_chat_model():
                 do_sample=True if args.temperature > 0 else False,
                 temperature=args.temperature,
             )
-            pred = model.chat(
+            # Batched generation (see evaluate_vqa.py): equivalent to per-sample
+            # model.chat under greedy decoding, much faster at bs>1.
+            answers_orig = model.batch_chat(
                 tokenizer=tokenizer,
                 pixel_values=pixel_values,
-                question=questions[0],
+                questions=questions,
+                num_patches_list=num_patches_list,
                 generation_config=generation_config,
                 verbose=True
             )
-            pred_orig = pred
             if args.cot:
-                pred = extract_answer(pred).strip()
-            answers = [pred]
+                answers = [extract_answer(a).strip() for a in answers_orig]
+            else:
+                answers = answers_orig
 
-            for question_id, answer, annotation in zip(question_ids, answers, annotations):
+            for question_id, answer, answer_orig in zip(question_ids, answers, answers_orig):
                 outputs.append({
                     'question_id': question_id,
-                    'text': pred,
-                    'text_orig': pred_orig,
+                    'text': answer,
+                    'text_orig': answer_orig,
                     'model_id': args.checkpoint,
                     'metadata': {},
                 })
@@ -290,7 +294,13 @@ if __name__ == '__main__':
     parser.add_argument('--load-in-4bit', action='store_true')
     parser.add_argument('--auto', action='store_true')
     parser.add_argument('--cot', action='store_true')
+    parser.add_argument('--test-file', type=str, default=None,
+                        help='override the selected dataset\'s question jsonl (e.g. a routed '
+                             'subset); requires exactly one --datasets. See CLAUDE.md.')
     args = parser.parse_args()
+
+    if args.test_file is not None:
+        assert len(args.datasets.split(',')) == 1, '--test-file requires exactly one --datasets'
 
     model_name = '_'.join(args.checkpoint.split('/')[-2:])
     model_name = f'{model_name}_cot' if args.cot else model_name
@@ -301,7 +311,11 @@ if __name__ == '__main__':
 
     args.datasets = args.datasets.split(',')
     print('datasets:', args.datasets)
-    assert args.batch_size == 1, 'Only batch size 1 is supported'
+    assert args.batch_size >= 1, 'batch size must be >= 1'
+
+    if args.test_file is not None:
+        ds_collections[args.datasets[0]]['question'] = args.test_file
+        print(f'test split overridden -> {args.test_file}')
 
     torch.distributed.init_process_group(
         backend='nccl',

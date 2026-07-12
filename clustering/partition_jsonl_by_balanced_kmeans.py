@@ -23,31 +23,54 @@ from tqdm import tqdm
 
 
 def load_clustering_results(clustering_results_dir, prefix="clustering"):
-    """Load existing clustering results (centroids only for single-stage)."""
+    """Load existing clustering results (centroids + optional global mean).
+
+    The clustering may have subtracted a global mean from the features before
+    L2-normalizing (see single_stage_balanced_kmeans.py). If a saved global-mean
+    vector exists, it is returned so features are preprocessed the SAME way here;
+    otherwise mean is None (backward-compatible with older, non-centered runs).
+    """
     results_dir = Path(clustering_results_dir)
-    
+
     # Load centroids
     centroids_file = results_dir / f"{prefix}_centroids.npy"
     if not centroids_file.exists():
         raise FileNotFoundError(f"Centroids not found: {centroids_file}")
-    
+
     centroids = np.load(centroids_file)
     print(f"Loaded centroids: shape {centroids.shape}")
-    
-    return centroids
+
+    # Load the global mean subtracted before clustering, if present
+    mean_file = results_dir / f"{prefix}_global_mean.npy"
+    if mean_file.exists():
+        mean_vector = np.load(mean_file)
+        print(f"Loaded global mean: shape {mean_vector.shape} "
+              f"(||mean|| = {np.linalg.norm(mean_vector):.4f}); will subtract before assignment")
+    else:
+        mean_vector = None
+        print("No global mean found; assigning on raw (non-centered) features")
+
+    return centroids, mean_vector
 
 
-def assign_to_clusters(features, centroids):
+def assign_to_clusters(features, centroids, mean_vector=None):
     """
     Assign features to clusters using cosine similarity (normalized dot product).
-    
+
     Args:
         features: numpy array of shape (N, D) - CLIP features
         centroids: numpy array of shape (n_clusters, D) - cluster centroids
-    
+        mean_vector: optional (D,) global mean to subtract before normalizing,
+            matching the preprocessing used to train the centroids
+
     Returns:
         assignments: numpy array of shape (N,) - cluster assignments
     """
+    # Subtract the same global mean used during clustering (if any) so cosine
+    # distances are measured in the identical, mean-centered space.
+    if mean_vector is not None:
+        features = features - mean_vector
+
     # Normalize features and centroids
     features_norm = features / np.linalg.norm(features, axis=1, keepdims=True)
     centroids_norm = centroids / np.linalg.norm(centroids, axis=1, keepdims=True)
@@ -274,7 +297,7 @@ def main():
     print("\n" + "=" * 80)
     print("Step 1: Loading clustering results")
     print("=" * 80)
-    centroids = load_clustering_results(args.clustering_results_dir, args.prefix)
+    centroids, mean_vector = load_clustering_results(args.clustering_results_dir, args.prefix)
     n_clusters = len(centroids)
     print(f"Number of clusters: {n_clusters}")
     
@@ -384,7 +407,7 @@ def main():
         
         # Step 4: Assign to clusters
         print("Assigning to clusters...")
-        assignments = assign_to_clusters(features, centroids)
+        assignments = assign_to_clusters(features, centroids, mean_vector)
         
         # Build image path to cluster mapping
         image_to_cluster = {}

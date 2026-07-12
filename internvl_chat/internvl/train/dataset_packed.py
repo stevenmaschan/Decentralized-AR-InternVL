@@ -61,9 +61,11 @@ class PackedDataset(IterableDataset):
         allow_overflow: bool = True,
         allow_empty_data: bool = False,
         allow_deduplicated_ds_name: bool = False,
+        seed: int = 0,
     ):
         super().__init__()
         self.tokenizer = tokenizer
+        self.seed = seed
         self.data_rank = data_rank
         self.data_world_size = data_world_size
         self.datasets = datasets
@@ -419,7 +421,10 @@ class PackedDataset(IterableDataset):
         worker_id = num_workers * self.data_rank + worker_id
         num_workers = num_workers * self.data_world_size
 
-        rng = np.random.default_rng(seed=worker_id)
+        # Combine the training data seed with worker_id so the cross-dataset
+        # interleave order varies across runs (different --seed) while staying
+        # decorrelated per worker/rank. seed=worker_id alone was invariant across runs.
+        rng = np.random.default_rng(seed=[self.seed, worker_id])
 
         # reset states of each dataset
         self.worker_id = worker_id

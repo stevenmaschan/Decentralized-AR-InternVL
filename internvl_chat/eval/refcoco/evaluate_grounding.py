@@ -117,10 +117,11 @@ def box_iou(boxes1, boxes2):
 
 def collate_fn(batches, tokenizer):
     pixel_values = torch.cat([_['pixel_values'] for _ in batches], dim=0)
+    num_patches_list = [_['pixel_values'].size(0) for _ in batches]
     texts = [_['text'] for _ in batches]
     bboxes = [_['bbox'] for _ in batches]
     hws = [_['hw'] for _ in batches]
-    return pixel_values, texts, bboxes, hws
+    return pixel_values, texts, bboxes, hws, num_patches_list
 
 
 class RefCOCODataset(torch.utils.data.Dataset):
@@ -215,7 +216,7 @@ def evaluate_chat_model():
         )
 
         outputs = []
-        for _, (pixel_values, questions, bboxes, hws) in enumerate(tqdm(dataloader)):
+        for _, (pixel_values, questions, bboxes, hws, num_patches_list) in enumerate(tqdm(dataloader)):
             pixel_values = pixel_values.to(torch.bfloat16).cuda()
             generation_config = dict(
                 num_beams=args.num_beams,
@@ -224,14 +225,17 @@ def evaluate_chat_model():
                 do_sample=True if args.temperature > 0 else False,
                 temperature=args.temperature,
             )
-            pred = model.chat(
+            # Batched generation: batch_chat runs the whole DataLoader batch in one
+            # forward, parallelizing the image/prompt prefill. Equivalent to per-sample
+            # model.chat under greedy decoding (validated); much faster at bs>1.
+            answers = model.batch_chat(
                 tokenizer=tokenizer,
                 pixel_values=pixel_values,
-                question=questions[0],
+                questions=questions,
+                num_patches_list=num_patches_list,
                 generation_config=generation_config,
                 verbose=True
             )
-            answers = [pred]
 
             for bbox, hw, answer in zip(bboxes, hws, answers):
                 outputs.append({
@@ -310,6 +314,9 @@ if __name__ == '__main__':
     parser.add_argument('--load-in-8bit', action='store_true')
     parser.add_argument('--load-in-4bit', action='store_true')
     parser.add_argument('--auto', action='store_true')
+    parser.add_argument('--test-file', type=str, default=None,
+                        help='override the selected dataset\'s jsonl (e.g. a routed subset); '
+                             'requires exactly one --datasets. See CLAUDE.md.')
     args = parser.parse_args()
 
     if not os.path.exists(args.out_dir):
@@ -317,7 +324,12 @@ if __name__ == '__main__':
 
     args.datasets = args.datasets.split(',')
     print('datasets:', args.datasets)
-    assert args.batch_size == 1, 'Only batch size 1 is supported'
+    assert args.batch_size >= 1, 'batch size must be >= 1'
+
+    if args.test_file is not None:
+        assert len(args.datasets) == 1, '--test-file requires exactly one --datasets'
+        ds_collections[args.datasets[0]] = args.test_file
+        print(f'test split overridden -> {args.test_file}')
 
     torch.distributed.init_process_group(
         backend='nccl',

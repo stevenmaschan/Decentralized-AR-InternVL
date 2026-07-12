@@ -181,5 +181,26 @@ results/
 !clustering/balanced-kmeans_vit-base-patch-16_2-coarse/clustering_tsne_clustering.png
 *.npz
 *.json
+*.jsonl
 *.txt
 *.jpg
+
+# Local project notes / assistant instructions (not shared)
+CLAUDE.md
+
+# --- Project artifacts: model checkpoints, data, and logs ---
+# Model checkpoints / training outputs (repo-root work_dirs; internvl_chat/work_dirs/ handled above)
+/work_dirs/
+# Pretrained base models (InternVL/pretrained/<hf-model-folder>)
+/InternVL/pretrained/
+# Trained dense + cluster-expert checkpoints
+/internvl-models/
+# Model weight files, wherever they land
+*.safetensors
+*.bin
+*.pth
+*.pt
+# Data (internvl_chat/data/ already ignored above; clustering feature dumps are *.npy/*.npz)
+/internvl-data/
+# Logs — Weights & Biases runs (*.log already ignored above)
+wandb/

@@ -755,6 +755,7 @@ def build_datasets(
     min_num_frame=8,
     max_num_frame=32,
     normalize_type='imagenet',
+    data_seed=0,
 ):
     datasets = []
     lengths = []
@@ -792,7 +793,10 @@ def build_datasets(
             data_world_size=data_world_size,
             distributed_mode=data_args.use_packed_ds,
             force_shuffle=data_args.use_packed_ds,
-            random_seed=ds_idx,
+            # Combine the training data seed with ds_idx so each dataset's
+            # intra-shuffle varies across runs (different --seed) while staying
+            # decorrelated per dataset. ds_idx alone was invariant across runs.
+            random_seed=[data_seed, ds_idx],
         )
         logger.info(f'Add dataset: {ds_name} with length: {len(dataset)}')
         datasets.append(dataset)
@@ -817,6 +821,7 @@ def build_datasets(
             replacement=data_args.replacement,
             allow_overflow=data_args.allow_overflow,
             allow_deduplicated_ds_name=False,
+            seed=data_seed,
         )
     elif data_args.use_data_resampling:
         total_length = sum(lengths)
@@ -1027,7 +1032,12 @@ def main():
         dynamic_image_size=data_args.dynamic_image_size, use_thumbnail=data_args.use_thumbnail,
         min_dynamic_patch=data_args.min_dynamic_patch, max_dynamic_patch=data_args.max_dynamic_patch,
         normalize_type=data_args.normalize_type, min_num_frame=data_args.min_num_frame,
-        max_num_frame=data_args.max_num_frame)
+        max_num_frame=data_args.max_num_frame,
+        # Seed the packed-data ordering (intra-dataset shuffle + cross-dataset
+        # interleave) so different --seed runs see different data orders.
+        # HF's data_seed only applies to samplers, which the packed IterableDataset
+        # does not use, so we thread it in explicitly (falling back to seed).
+        data_seed=training_args.data_seed if training_args.data_seed is not None else training_args.seed)
 
     def _freeze_params(module):
         for param in module.parameters():

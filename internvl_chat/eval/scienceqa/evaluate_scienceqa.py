@@ -306,6 +306,10 @@ if __name__ == '__main__':
     parser.add_argument('--load-in-4bit', action='store_true')
     parser.add_argument('--auto', action='store_true')
     parser.add_argument('--cot', action='store_true')
+    parser.add_argument('--test-file', type=str, default=None,
+                        help='Override the test split of the (single) selected dataset. Used by '
+                             'evaluation/eval_hard_routing.py to evaluate a routed subset without '
+                             'registering a new ds_collections entry.')
     args = parser.parse_args()
 
     model_name = '_'.join(args.checkpoint.split('/')[-2:])
@@ -316,6 +320,10 @@ if __name__ == '__main__':
         os.makedirs(args.out_dir, exist_ok=True)
 
     args.datasets = args.datasets.split(',')
+    if args.test_file is not None:
+        assert len(args.datasets) == 1, '--test-file requires exactly one --datasets'
+        ds_collections[args.datasets[0]]['root'] = args.test_file
+        print(f'test split overridden -> {args.test_file}')
     print('datasets:', args.datasets)
     assert args.batch_size == 1, 'Only batch size 1 is supported'
 

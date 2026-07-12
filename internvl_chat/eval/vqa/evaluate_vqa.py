@@ -159,6 +159,38 @@ ds_collections = {
         'metric': 'vqa_score',
         'max_new_tokens': 10,
     },
+    'textvqa_val_hardroute_expert0': {
+        'train': 'data/textvqa/textvqa_train.jsonl',
+        'test': 'data/textvqa/textvqa_val_hardroute_expert0.jsonl',
+        'question': 'data/textvqa/textvqa_val_questions.json',
+        'annotation': 'data/textvqa/textvqa_val_annotations.json',
+        'metric': 'vqa_score',
+        'max_new_tokens': 10,
+    },
+    'textvqa_val_hardroute_expert1': {
+        'train': 'data/textvqa/textvqa_train.jsonl',
+        'test': 'data/textvqa/textvqa_val_hardroute_expert1.jsonl',
+        'question': 'data/textvqa/textvqa_val_questions.json',
+        'annotation': 'data/textvqa/textvqa_val_annotations.json',
+        'metric': 'vqa_score',
+        'max_new_tokens': 10,
+    },
+    'textvqa_val_hardroute_expert2': {
+        'train': 'data/textvqa/textvqa_train.jsonl',
+        'test': 'data/textvqa/textvqa_val_hardroute_expert2.jsonl',
+        'question': 'data/textvqa/textvqa_val_questions.json',
+        'annotation': 'data/textvqa/textvqa_val_annotations.json',
+        'metric': 'vqa_score',
+        'max_new_tokens': 10,
+    },
+    'textvqa_val_hardroute_expert3': {
+        'train': 'data/textvqa/textvqa_train.jsonl',
+        'test': 'data/textvqa/textvqa_val_hardroute_expert3.jsonl',
+        'question': 'data/textvqa/textvqa_val_questions.json',
+        'annotation': 'data/textvqa/textvqa_val_annotations.json',
+        'metric': 'vqa_score',
+        'max_new_tokens': 10,
+    },
     'textvqa_val_2experts_cluster0': {
         'train': 'data/textvqa/textvqa_train.jsonl',
         'test': 'data/textvqa/val_2experts/textvqa_val_cluster0.jsonl',
@@ -609,11 +641,12 @@ def evaluate_exact_match_accuracy(entries):
 
 def collate_fn(batches, tokenizer):
     pixel_values = torch.cat([_['pixel_values'] for _ in batches], dim=0)
+    num_patches_list = [_['pixel_values'].size(0) for _ in batches]
     questions = [_['question'] for _ in batches]
     question_ids = [_['question_id'] for _ in batches]
     annotations = [_['annotation'] for _ in batches]
 
-    return pixel_values, questions, question_ids, annotations
+    return pixel_values, questions, question_ids, annotations, num_patches_list
 
 
 class VQADataset(torch.utils.data.Dataset):
@@ -751,7 +784,7 @@ def evaluate_chat_model():
         )
 
         outputs = []
-        for _, (pixel_values, questions, question_ids, annotations) in tqdm(enumerate(dataloader)):
+        for _, (pixel_values, questions, question_ids, annotations, num_patches_list) in tqdm(enumerate(dataloader)):
             pixel_values = pixel_values.to(torch.bfloat16).cuda()
             generation_config = dict(
                 num_beams=args.num_beams,
@@ -760,18 +793,23 @@ def evaluate_chat_model():
                 do_sample=True if args.temperature > 0 else False,
                 temperature=args.temperature,
             )
-            pred = model.chat(
+            # Batched generation: batch_chat runs the whole DataLoader batch in one
+            # forward, parallelizing the (dominant) image/prompt prefill. Equivalent to
+            # per-sample model.chat under greedy decoding (validated); much faster at bs>1.
+            answers = model.batch_chat(
                 tokenizer=tokenizer,
                 pixel_values=pixel_values,
-                question=questions[0],
+                questions=questions,
+                num_patches_list=num_patches_list,
                 generation_config=generation_config,
                 verbose=True
             )
-            answers = [pred]
 
             for question, question_id, answer, annotation in zip(questions, question_ids, answers, annotations):
                 if ds_name in ['vqav2_val', 'vqav2_val_2experts_cluster0', 'vqav2_val_2experts_cluster1', 'vqav2_val_balanced_2experts_cluster0', 'vqav2_val_balanced_2experts_cluster1', 'vqav2_val_balanced_vitl14_2experts_cluster0', 'vqav2_val_balanced_vitl14_2experts_cluster1', 'vqav2_val_balanced_vitb16_2experts_cluster0', 'vqav2_val_balanced_vitb16_2experts_cluster1', 'vqav2_val_balanced_vitb16_4experts_cluster0', 'vqav2_val_balanced_vitb16_4experts_cluster1', 'vqav2_val_balanced_vitb16_4experts_cluster2', 'vqav2_val_balanced_vitb16_4experts_cluster3', 'vqav2_testdev', 'okvqa_val', 'okvqa_val_2experts_cluster0', 'okvqa_val_2experts_cluster1', 'textvqa_val', 'textvqa_val_2experts_cluster0', 'textvqa_val_2experts_cluster1', 'textvqa_val_balanced_2experts_cluster0', 'textvqa_val_balanced_2experts_cluster1', 'textvqa_val_balanced_vitl14_2experts_cluster0', 'textvqa_val_balanced_vitl14_2experts_cluster1', 'textvqa_val_balanced_vitb16_4experts_cluster0', 'textvqa_val_balanced_vitb16_4experts_cluster1', 'textvqa_val_balanced_vitb16_4experts_cluster2', 'textvqa_val_balanced_vitb16_4experts_cluster3',
-                               'vizwiz_val', 'textvqa_val_ocr']:
+                               'vizwiz_val', 'textvqa_val_ocr',
+                               'textvqa_val_hardroute_expert0', 'textvqa_val_hardroute_expert1',
+                               'textvqa_val_hardroute_expert2', 'textvqa_val_hardroute_expert3']:
                     outputs.append({
                         'question': question,
                         'question_id': question_id,
@@ -891,7 +929,16 @@ def evaluate_chat_model():
                               results_file + ' --dst ' + dst_file)
                     command = f'cd ./data/gqa/ && {python_path} eval.py --tier testdev_balanced && cd ../../'
                     print(command)
-                    accuracy = subprocess.check_output(command, shell=True, universal_newlines=True)
+                    try:
+                        accuracy = subprocess.check_output(command, shell=True, universal_newlines=True)
+                    except subprocess.CalledProcessError as e:
+                        # The official GQA harness requires predictions for the FULL testdev_balanced
+                        # set, so it errors ("missing predictions") on a routed subset. The
+                        # predictions file is already written above; a caller that re-scores the
+                        # merged union (evaluation/eval_hard_routing.py) computes the real metric.
+                        # Don't let per-subset scoring abort prediction generation.
+                        accuracy = f'gqa internal scoring skipped (subset not full testdev_balanced): {e}'
+                        print(accuracy)
                 else:
                     accuracy = {'accuracy': evaluate_exact_match_accuracy(merged_outputs)}
                 print(ds_name, accuracy)
@@ -925,14 +972,22 @@ if __name__ == '__main__':
     parser.add_argument('--load-in-8bit', action='store_true')
     parser.add_argument('--load-in-4bit', action='store_true')
     parser.add_argument('--auto', action='store_true')
+    parser.add_argument('--test-file', type=str, default=None,
+                        help='Override the test split of the (single) selected dataset. Used by '
+                             'evaluation/eval_hard_routing.py to evaluate a routed subset without '
+                             'registering a new ds_collections entry.')
     args = parser.parse_args()
 
     if not os.path.exists(args.out_dir):
         os.makedirs(args.out_dir, exist_ok=True)
 
     args.datasets = args.datasets.split(',')
+    if args.test_file is not None:
+        assert len(args.datasets) == 1, '--test-file requires exactly one --datasets'
+        ds_collections[args.datasets[0]]['test'] = args.test_file
+        print(f'test split overridden -> {args.test_file}')
     print('datasets:', args.datasets)
-    assert args.batch_size == 1, 'Only batch size 1 is supported'
+    assert args.batch_size >= 1, 'batch size must be >= 1'
 
     torch.distributed.init_process_group(
         backend='nccl',
