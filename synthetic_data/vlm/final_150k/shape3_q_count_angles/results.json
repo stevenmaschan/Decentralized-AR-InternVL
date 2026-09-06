@@ -1,0 +1,687 @@
+{
+  "args": {
+    "annotations": "synthetic_data/sweep_datasets/scale_150k/experts_shape3/q_count_angles/annotations.jsonl",
+    "features": "synthetic_data/sweep_datasets/scale_150k/features_vit_base_patch16.npy",
+    "keys": null,
+    "out_dir": "synthetic_data/vlm/final_150k/shape3_q_count_angles.tmp",
+    "val_frac": 0.1,
+    "test_frac": 0.1,
+    "split_seed": 0,
+    "max_train": 150000,
+    "tokenizer": "synthetic_data/vlm/final_150k/shared_tokenizer.json",
+    "feature_norm": "standardize",
+    "no_vision": false,
+    "d_model": 128,
+    "n_layers": 4,
+    "n_heads": 4,
+    "n_prefix": 4,
+    "dropout": 0.1,
+    "moe_experts": 1,
+    "moe_aux_coef": 0.01,
+    "epochs": 50,
+    "batch_size": 21,
+    "lr": 0.0003,
+    "weight_decay": 0.01,
+    "warmup_frac": 0.03,
+    "grad_clip": 1.0,
+    "eval_every": 5,
+    "num_workers": 4,
+    "device": "cuda:0",
+    "seed": 0
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 1.2500049467340653
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.4381952577893565
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.35478174169705035
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.31089270563163396
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.28299841389991215,
+      "val_loss": 0.28692569162298753,
+      "val_exact_match": 0.7560679611650486
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.2578737644792513
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.23638367434552743
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.21887190022369152
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.20244340366127608
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.18952095544422023,
+      "val_loss": 0.3037414139643022,
+      "val_exact_match": 0.787621359223301
+    },
+    {
+      "epoch": 11,
+      "train_loss": 0.17339413021340588
+    },
+    {
+      "epoch": 12,
+      "train_loss": 0.16456083912944297
+    },
+    {
+      "epoch": 13,
+      "train_loss": 0.14963291818020133
+    },
+    {
+      "epoch": 14,
+      "train_loss": 0.1388450244006072
+    },
+    {
+      "epoch": 15,
+      "train_loss": 0.1286815887429068,
+      "val_loss": 0.3976138306564642,
+      "val_exact_match": 0.7633495145631068
+    },
+    {
+      "epoch": 16,
+      "train_loss": 0.11837876487190387
+    },
+    {
+      "epoch": 17,
+      "train_loss": 0.10957438198331365
+    },
+    {
+      "epoch": 18,
+      "train_loss": 0.09768365943624331
+    },
+    {
+      "epoch": 19,
+      "train_loss": 0.09337189549272058
+    },
+    {
+      "epoch": 20,
+      "train_loss": 0.08838412299350386,
+      "val_loss": 0.4885088788634799,
+      "val_exact_match": 0.7754854368932039
+    },
+    {
+      "epoch": 21,
+      "train_loss": 0.08069916215743426
+    },
+    {
+      "epoch": 22,
+      "train_loss": 0.07478767740464176
+    },
+    {
+      "epoch": 23,
+      "train_loss": 0.06937688670491642
+    },
+    {
+      "epoch": 24,
+      "train_loss": 0.06425446251751735
+    },
+    {
+      "epoch": 25,
+      "train_loss": 0.05833102028057702,
+      "val_loss": 0.6191334300793174,
+      "val_exact_match": 0.7730582524271845
+    },
+    {
+      "epoch": 26,
+      "train_loss": 0.05070528416322008
+    },
+    {
+      "epoch": 27,
+      "train_loss": 0.04830966331213189
+    },
+    {
+      "epoch": 28,
+      "train_loss": 0.045229813443301556
+    },
+    {
+      "epoch": 29,
+      "train_loss": 0.03900809700962512
+    },
+    {
+      "epoch": 30,
+      "train_loss": 0.03526128086281608,
+      "val_loss": 0.7243585365282449,
+      "val_exact_match": 0.7912621359223301
+    },
+    {
+      "epoch": 31,
+      "train_loss": 0.03187376612977366
+    },
+    {
+      "epoch": 32,
+      "train_loss": 0.028872065990056484
+    },
+    {
+      "epoch": 33,
+      "train_loss": 0.027719619191246863
+    },
+    {
+      "epoch": 34,
+      "train_loss": 0.024130377933265956
+    },
+    {
+      "epoch": 35,
+      "train_loss": 0.0233400094900757,
+      "val_loss": 0.7974959875821175,
+      "val_exact_match": 0.7912621359223301
+    },
+    {
+      "epoch": 36,
+      "train_loss": 0.019855335546028367
+    },
+    {
+      "epoch": 37,
+      "train_loss": 0.016238540558694704
+    },
+    {
+      "epoch": 38,
+      "train_loss": 0.016138463669945445
+    },
+    {
+      "epoch": 39,
+      "train_loss": 0.013067537540568193
+    },
+    {
+      "epoch": 40,
+      "train_loss": 0.011262299485855337,
+      "val_loss": 0.9244786682405355,
+      "val_exact_match": 0.7900485436893204
+    },
+    {
+      "epoch": 41,
+      "train_loss": 0.010867044440272077
+    },
+    {
+      "epoch": 42,
+      "train_loss": 0.010273124075394066
+    },
+    {
+      "epoch": 43,
+      "train_loss": 0.009175546871464997
+    },
+    {
+      "epoch": 44,
+      "train_loss": 0.007888585737636488
+    },
+    {
+      "epoch": 45,
+      "train_loss": 0.007427255978726534,
+      "val_loss": 0.9520619001679063,
+      "val_exact_match": 0.7900485436893204
+    },
+    {
+      "epoch": 46,
+      "train_loss": 0.007384776233746823
+    },
+    {
+      "epoch": 47,
+      "train_loss": 0.007257965565598178
+    },
+    {
+      "epoch": 48,
+      "train_loss": 0.006438607203168502
+    },
+    {
+      "epoch": 49,
+      "train_loss": 0.006624527704076079
+    },
+    {
+      "epoch": 50,
+      "train_loss": 0.00608170890727703,
+      "val_loss": 0.9622420222246537,
+      "val_exact_match": 0.7851941747572816
+    }
+  ],
+  "best": {
+    "val_em": 0.7912621359223301,
+    "epoch": 30
+  },
+  "val": {
+    "exact_match": 0.7912621359223301,
+    "n": 824,
+    "per_task": {
+      "5": {
+        "name": "count_by_angles",
+        "n": 824,
+        "exact_match": 0.7912621359223301,
+        "mae": 0.220873786407767,
+        "unparseable": 0
+      }
+    },
+    "per_alpha_bin": {
+      "0": {
+        "range": [
+          0.0,
+          0.2
+        ],
+        "n": 629,
+        "exact_match": 0.8362480127186009,
+        "ocr_em": null,
+        "ocr_n": 0,
+        "shape_em": 0.8362480127186009,
+        "shape_n": 629
+      },
+      "1": {
+        "range": [
+          0.2,
+          0.4
+        ],
+        "n": 75,
+        "exact_match": 0.7733333333333333,
+        "ocr_em": null,
+        "ocr_n": 0,
+        "shape_em": 0.7733333333333333,
+        "shape_n": 75
+      },
+      "2": {
+        "range": [
+          0.4,
+          0.6
+        ],
+        "n": 64,
+        "exact_match": 0.609375,
+        "ocr_em": null,
+        "ocr_n": 0,
+        "shape_em": 0.609375,
+        "shape_n": 64
+      },
+      "3": {
+        "range": [
+          0.6,
+          0.8
+        ],
+        "n": 36,
+        "exact_match": 0.5555555555555556,
+        "ocr_em": null,
+        "ocr_n": 0,
+        "shape_em": 0.5555555555555556,
+        "shape_n": 36
+      },
+      "4": {
+        "range": [
+          0.8,
+          1.0
+        ],
+        "n": 20,
+        "exact_match": 0.45,
+        "ocr_em": null,
+        "ocr_n": 0,
+        "shape_em": 0.45,
+        "shape_n": 20
+      }
+    }
+  },
+  "test": {
+    "exact_match": 0.7625570776255708,
+    "n": 876,
+    "per_task": {
+      "5": {
+        "name": "count_by_angles",
+        "n": 876,
+        "exact_match": 0.7625570776255708,
+        "mae": 0.2682648401826484,
+        "unparseable": 0
+      }
+    },
+    "per_alpha_bin": {
+      "0": {
+        "range": [
+          0.0,
+          0.2
+        ],
+        "n": 651,
+        "exact_match": 0.7910906298003072,
+        "ocr_em": null,
+        "ocr_n": 0,
+        "shape_em": 0.7910906298003072,
+        "shape_n": 651
+      },
+      "1": {
+        "range": [
+          0.2,
+          0.4
+        ],
+        "n": 95,
+        "exact_match": 0.7368421052631579,
+        "ocr_em": null,
+        "ocr_n": 0,
+        "shape_em": 0.7368421052631579,
+        "shape_n": 95
+      },
+      "2": {
+        "range": [
+          0.4,
+          0.6
+        ],
+        "n": 59,
+        "exact_match": 0.711864406779661,
+        "ocr_em": null,
+        "ocr_n": 0,
+        "shape_em": 0.711864406779661,
+        "shape_n": 59
+      },
+      "3": {
+        "range": [
+          0.6,
+          0.8
+        ],
+        "n": 53,
+        "exact_match": 0.5849056603773585,
+        "ocr_em": null,
+        "ocr_n": 0,
+        "shape_em": 0.5849056603773585,
+        "shape_n": 53
+      },
+      "4": {
+        "range": [
+          0.8,
+          1.0
+        ],
+        "n": 18,
+        "exact_match": 0.5555555555555556,
+        "ocr_em": null,
+        "ocr_n": 0,
+        "shape_em": 0.5555555555555556,
+        "shape_n": 18
+      }
+    }
+  },
+  "test_majority_baseline": {
+    "exact_match": 0.2134703196347032,
+    "n": 876,
+    "per_task": {
+      "5": {
+        "name": "count_by_angles",
+        "n": 876,
+        "exact_match": 0.2134703196347032,
+        "mae": 1.9417808219178083,
+        "unparseable": 0
+      }
+    },
+    "per_alpha_bin": {
+      "0": {
+        "range": [
+          0.0,
+          0.2
+        ],
+        "n": 651,
+        "exact_match": 0.21351766513056836,
+        "ocr_em": null,
+        "ocr_n": 0,
+        "shape_em": 0.21351766513056836,
+        "shape_n": 651
+      },
+      "1": {
+        "range": [
+          0.2,
+          0.4
+        ],
+        "n": 95,
+        "exact_match": 0.17894736842105263,
+        "ocr_em": null,
+        "ocr_n": 0,
+        "shape_em": 0.17894736842105263,
+        "shape_n": 95
+      },
+      "2": {
+        "range": [
+          0.4,
+          0.6
+        ],
+        "n": 59,
+        "exact_match": 0.23728813559322035,
+        "ocr_em": null,
+        "ocr_n": 0,
+        "shape_em": 0.23728813559322035,
+        "shape_n": 59
+      },
+      "3": {
+        "range": [
+          0.6,
+          0.8
+        ],
+        "n": 53,
+        "exact_match": 0.22641509433962265,
+        "ocr_em": null,
+        "ocr_n": 0,
+        "shape_em": 0.22641509433962265,
+        "shape_n": 53
+      },
+      "4": {
+        "range": [
+          0.8,
+          1.0
+        ],
+        "n": 18,
+        "exact_match": 0.2777777777777778,
+        "ocr_em": null,
+        "ocr_n": 0,
+        "shape_em": 0.2777777777777778,
+        "shape_n": 18
+      }
+    }
+  },
+  "examples": [
+    {
+      "image_id": 155005,
+      "alpha": 0.2442,
+      "task_id": 5,
+      "question": "How many shapes have at least 3 angles?",
+      "gold": "5",
+      "pred": "6"
+    },
+    {
+      "image_id": 155010,
+      "alpha": 0.0,
+      "task_id": 5,
+      "question": "How many shapes have at least 6 angles?",
+      "gold": "1",
+      "pred": "1"
+    },
+    {
+      "image_id": 155014,
+      "alpha": 0.2387,
+      "task_id": 5,
+      "question": "How many shapes have at least 4 angles?",
+      "gold": "0",
+      "pred": "0"
+    },
+    {
+      "image_id": 155016,
+      "alpha": 0.0,
+      "task_id": 5,
+      "question": "How many shapes have at least 4 angles?",
+      "gold": "0",
+      "pred": "1"
+    },
+    {
+      "image_id": 155017,
+      "alpha": 0.5885,
+      "task_id": 5,
+      "question": "How many shapes have at least 6 angles?",
+      "gold": "0",
+      "pred": "0"
+    },
+    {
+      "image_id": 155018,
+      "alpha": 0.0594,
+      "task_id": 5,
+      "question": "How many shapes have at least 6 angles?",
+      "gold": "1",
+      "pred": "1"
+    },
+    {
+      "image_id": 155020,
+      "alpha": 0.0,
+      "task_id": 5,
+      "question": "How many shapes have at least 4 angles?",
+      "gold": "0",
+      "pred": "0"
+    },
+    {
+      "image_id": 155026,
+      "alpha": 0.0016,
+      "task_id": 5,
+      "question": "How many shapes have at least 3 angles?",
+      "gold": "8",
+      "pred": "7"
+    },
+    {
+      "image_id": 155027,
+      "alpha": 0.035,
+      "task_id": 5,
+      "question": "How many shapes have at least 6 angles?",
+      "gold": "1",
+      "pred": "1"
+    },
+    {
+      "image_id": 155029,
+      "alpha": 0.0004,
+      "task_id": 5,
+      "question": "How many shapes have at least 6 angles?",
+      "gold": "1",
+      "pred": "1"
+    },
+    {
+      "image_id": 155032,
+      "alpha": 0.0011,
+      "task_id": 5,
+      "question": "How many shapes have at least 6 angles?",
+      "gold": "0",
+      "pred": "0"
+    },
+    {
+      "image_id": 155037,
+      "alpha": 0.1236,
+      "task_id": 5,
+      "question": "How many shapes have at least 6 angles?",
+      "gold": "2",
+      "pred": "2"
+    },
+    {
+      "image_id": 155045,
+      "alpha": 0.0034,
+      "task_id": 5,
+      "question": "How many shapes have at least 6 angles?",
+      "gold": "0",
+      "pred": "0"
+    },
+    {
+      "image_id": 155048,
+      "alpha": 0.4325,
+      "task_id": 5,
+      "question": "How many shapes have at least 4 angles?",
+      "gold": "4",
+      "pred": "3"
+    },
+    {
+      "image_id": 155055,
+      "alpha": 0.7328,
+      "task_id": 5,
+      "question": "How many shapes have at least 6 angles?",
+      "gold": "1",
+      "pred": "2"
+    },
+    {
+      "image_id": 155057,
+      "alpha": 0.2442,
+      "task_id": 5,
+      "question": "How many shapes have at least 4 angles?",
+      "gold": "2",
+      "pred": "2"
+    },
+    {
+      "image_id": 155058,
+      "alpha": 0.0004,
+      "task_id": 5,
+      "question": "How many shapes have at least 4 angles?",
+      "gold": "0",
+      "pred": "0"
+    },
+    {
+      "image_id": 155059,
+      "alpha": 0.0499,
+      "task_id": 5,
+      "question": "How many shapes have at least 3 angles?",
+      "gold": "5",
+      "pred": "5"
+    },
+    {
+      "image_id": 155066,
+      "alpha": 0.0909,
+      "task_id": 5,
+      "question": "How many shapes have at least 3 angles?",
+      "gold": "7",
+      "pred": "7"
+    },
+    {
+      "image_id": 155074,
+      "alpha": 0.0003,
+      "task_id": 5,
+      "question": "How many shapes have at least 4 angles?",
+      "gold": "1",
+      "pred": "1"
+    },
+    {
+      "image_id": 155075,
+      "alpha": 0.5344,
+      "task_id": 5,
+      "question": "How many shapes have at least 4 angles?",
+      "gold": "1",
+      "pred": "0"
+    },
+    {
+      "image_id": 155079,
+      "alpha": 0.0022,
+      "task_id": 5,
+      "question": "How many shapes have at least 3 angles?",
+      "gold": "9",
+      "pred": "8"
+    },
+    {
+      "image_id": 155081,
+      "alpha": 0.0,
+      "task_id": 5,
+      "question": "How many shapes have at least 6 angles?",
+      "gold": "2",
+      "pred": "2"
+    },
+    {
+      "image_id": 155084,
+      "alpha": 0.0,
+      "task_id": 5,
+      "question": "How many shapes have at least 3 angles?",
+      "gold": "2",
+      "pred": "2"
+    },
+    {
+      "image_id": 155087,
+      "alpha": 0.0903,
+      "task_id": 5,
+      "question": "How many shapes have at least 6 angles?",
+      "gold": "1",
+      "pred": "1"
+    }
+  ],
+  "world_size": 1,
+  "effective_batch_size": 21
+}

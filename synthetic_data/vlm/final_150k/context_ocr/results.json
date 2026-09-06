@@ -1,0 +1,684 @@
+{
+  "args": {
+    "annotations": "synthetic_data/sweep_datasets/scale_150k/experts_task/expert_ocr/annotations.jsonl",
+    "features": "synthetic_data/sweep_datasets/scale_150k/features_vit_base_patch16.npy",
+    "keys": null,
+    "out_dir": "synthetic_data/vlm/final_150k/context_ocr.tmp",
+    "val_frac": 0.1,
+    "test_frac": 0.1,
+    "split_seed": 0,
+    "max_train": 150000,
+    "tokenizer": "synthetic_data/vlm/final_150k/shared_tokenizer.json",
+    "feature_norm": "standardize",
+    "no_vision": false,
+    "d_model": 128,
+    "n_layers": 4,
+    "n_heads": 4,
+    "n_prefix": 4,
+    "dropout": 0.1,
+    "moe_experts": 1,
+    "moe_aux_coef": 0.01,
+    "epochs": 50,
+    "batch_size": 64,
+    "lr": 0.0003,
+    "weight_decay": 0.01,
+    "warmup_frac": 0.03,
+    "grad_clip": 1.0,
+    "eval_every": 5,
+    "num_workers": 4,
+    "device": "cuda:1",
+    "seed": 0
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 2.6698616269187303
+    },
+    {
+      "epoch": 2,
+      "train_loss": 1.0941205574279456
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.8265504215475866
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.7245877394230609
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.6640274566142005,
+      "val_loss": 0.6236343106565042,
+      "val_exact_match": 0.46628986677432377
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.6197022469753646
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.5859899522173643
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.5578507910866315
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.5311834773308056
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.5101838189376271,
+      "val_loss": 0.5445709979852922,
+      "val_exact_match": 0.5220024222850222
+    },
+    {
+      "epoch": 11,
+      "train_loss": 0.4892578087859302
+    },
+    {
+      "epoch": 12,
+      "train_loss": 0.47200884476427063
+    },
+    {
+      "epoch": 13,
+      "train_loss": 0.4564617151317793
+    },
+    {
+      "epoch": 14,
+      "train_loss": 0.4394898120862786
+    },
+    {
+      "epoch": 15,
+      "train_loss": 0.4251340833398954,
+      "val_loss": 0.5232101134762818,
+      "val_exact_match": 0.5446104158255954
+    },
+    {
+      "epoch": 16,
+      "train_loss": 0.4120236267109487
+    },
+    {
+      "epoch": 17,
+      "train_loss": 0.3988409839308291
+    },
+    {
+      "epoch": 18,
+      "train_loss": 0.3880853488125223
+    },
+    {
+      "epoch": 19,
+      "train_loss": 0.3744865262545345
+    },
+    {
+      "epoch": 20,
+      "train_loss": 0.3612892207975224,
+      "val_loss": 0.5178082146256933,
+      "val_exact_match": 0.542995559144126
+    },
+    {
+      "epoch": 21,
+      "train_loss": 0.3524280870541687
+    },
+    {
+      "epoch": 22,
+      "train_loss": 0.34049634269768025
+    },
+    {
+      "epoch": 23,
+      "train_loss": 0.3319385048476919
+    },
+    {
+      "epoch": 24,
+      "train_loss": 0.32109495505188296
+    },
+    {
+      "epoch": 25,
+      "train_loss": 0.31195842869818907,
+      "val_loss": 0.5115839910853609,
+      "val_exact_match": 0.551473556721841
+    },
+    {
+      "epoch": 26,
+      "train_loss": 0.30375022337362334
+    },
+    {
+      "epoch": 27,
+      "train_loss": 0.29320812267004526
+    },
+    {
+      "epoch": 28,
+      "train_loss": 0.2841029283080311
+    },
+    {
+      "epoch": 29,
+      "train_loss": 0.2769536612381435
+    },
+    {
+      "epoch": 30,
+      "train_loss": 0.27056900596290595,
+      "val_loss": 0.5244634822658656,
+      "val_exact_match": 0.5599515542995559
+    },
+    {
+      "epoch": 31,
+      "train_loss": 0.26206982797967826
+    },
+    {
+      "epoch": 32,
+      "train_loss": 0.25432360925361946
+    },
+    {
+      "epoch": 33,
+      "train_loss": 0.2463947306911091
+    },
+    {
+      "epoch": 34,
+      "train_loss": 0.24023342096612169
+    },
+    {
+      "epoch": 35,
+      "train_loss": 0.2337553567013822,
+      "val_loss": 0.535213931996515,
+      "val_exact_match": 0.5627775534921275
+    },
+    {
+      "epoch": 36,
+      "train_loss": 0.22846903119519205
+    },
+    {
+      "epoch": 37,
+      "train_loss": 0.22379446959552463
+    },
+    {
+      "epoch": 38,
+      "train_loss": 0.21757791553901712
+    },
+    {
+      "epoch": 39,
+      "train_loss": 0.2131987352575091
+    },
+    {
+      "epoch": 40,
+      "train_loss": 0.2101183133381568,
+      "val_loss": 0.5454166586311835,
+      "val_exact_match": 0.5752926927735164
+    },
+    {
+      "epoch": 41,
+      "train_loss": 0.2042430581312002
+    },
+    {
+      "epoch": 42,
+      "train_loss": 0.20189006127419074
+    },
+    {
+      "epoch": 43,
+      "train_loss": 0.19905640436793787
+    },
+    {
+      "epoch": 44,
+      "train_loss": 0.1969111323895417
+    },
+    {
+      "epoch": 45,
+      "train_loss": 0.19437800677268396,
+      "val_loss": 0.5517665404971047,
+      "val_exact_match": 0.5720629794105773
+    },
+    {
+      "epoch": 46,
+      "train_loss": 0.19266424529828055
+    },
+    {
+      "epoch": 47,
+      "train_loss": 0.19015960069643653
+    },
+    {
+      "epoch": 48,
+      "train_loss": 0.19030186245194988
+    },
+    {
+      "epoch": 49,
+      "train_loss": 0.1905256854724384
+    },
+    {
+      "epoch": 50,
+      "train_loss": 0.18937884745023872,
+      "val_loss": 0.5524118171320301,
+      "val_exact_match": 0.5716592652402099
+    }
+  ],
+  "best": {
+    "val_em": 0.5752926927735164,
+    "epoch": 40
+  },
+  "val": {
+    "exact_match": 0.5752926927735164,
+    "n": 2477,
+    "per_task": {
+      "1": {
+        "name": "ocr",
+        "n": 2477,
+        "exact_match": 0.5752926927735164,
+        "cer": 0.18167137666532018
+      }
+    },
+    "per_alpha_bin": {
+      "0": {
+        "range": [
+          0.0,
+          0.2
+        ],
+        "n": 86,
+        "exact_match": 0.32558139534883723,
+        "ocr_em": 0.32558139534883723,
+        "ocr_n": 86,
+        "shape_em": null,
+        "shape_n": 0
+      },
+      "1": {
+        "range": [
+          0.2,
+          0.4
+        ],
+        "n": 105,
+        "exact_match": 0.5142857142857142,
+        "ocr_em": 0.5142857142857142,
+        "ocr_n": 105,
+        "shape_em": null,
+        "shape_n": 0
+      },
+      "2": {
+        "range": [
+          0.4,
+          0.6
+        ],
+        "n": 156,
+        "exact_match": 0.5512820512820513,
+        "ocr_em": 0.5512820512820513,
+        "ocr_n": 156,
+        "shape_em": null,
+        "shape_n": 0
+      },
+      "3": {
+        "range": [
+          0.6,
+          0.8
+        ],
+        "n": 260,
+        "exact_match": 0.5961538461538461,
+        "ocr_em": 0.5961538461538461,
+        "ocr_n": 260,
+        "shape_em": null,
+        "shape_n": 0
+      },
+      "4": {
+        "range": [
+          0.8,
+          1.0
+        ],
+        "n": 1870,
+        "exact_match": 0.5893048128342246,
+        "ocr_em": 0.5893048128342246,
+        "ocr_n": 1870,
+        "shape_em": null,
+        "shape_n": 0
+      }
+    }
+  },
+  "test": {
+    "exact_match": 0.583732057416268,
+    "n": 2508,
+    "per_task": {
+      "1": {
+        "name": "ocr",
+        "n": 2508,
+        "exact_match": 0.583732057416268,
+        "cer": 0.17371743753322622
+      }
+    },
+    "per_alpha_bin": {
+      "0": {
+        "range": [
+          0.0,
+          0.2
+        ],
+        "n": 70,
+        "exact_match": 0.2857142857142857,
+        "ocr_em": 0.2857142857142857,
+        "ocr_n": 70,
+        "shape_em": null,
+        "shape_n": 0
+      },
+      "1": {
+        "range": [
+          0.2,
+          0.4
+        ],
+        "n": 115,
+        "exact_match": 0.46956521739130436,
+        "ocr_em": 0.46956521739130436,
+        "ocr_n": 115,
+        "shape_em": null,
+        "shape_n": 0
+      },
+      "2": {
+        "range": [
+          0.4,
+          0.6
+        ],
+        "n": 137,
+        "exact_match": 0.5693430656934306,
+        "ocr_em": 0.5693430656934306,
+        "ocr_n": 137,
+        "shape_em": null,
+        "shape_n": 0
+      },
+      "3": {
+        "range": [
+          0.6,
+          0.8
+        ],
+        "n": 279,
+        "exact_match": 0.5878136200716846,
+        "ocr_em": 0.5878136200716846,
+        "ocr_n": 279,
+        "shape_em": null,
+        "shape_n": 0
+      },
+      "4": {
+        "range": [
+          0.8,
+          1.0
+        ],
+        "n": 1907,
+        "exact_match": 0.6019926586261143,
+        "ocr_em": 0.6019926586261143,
+        "ocr_n": 1907,
+        "shape_em": null,
+        "shape_n": 0
+      }
+    }
+  },
+  "test_majority_baseline": {
+    "exact_match": 0.1511164274322169,
+    "n": 2508,
+    "per_task": {
+      "1": {
+        "name": "ocr",
+        "n": 2508,
+        "exact_match": 0.1511164274322169,
+        "cer": 0.8488835725677831
+      }
+    },
+    "per_alpha_bin": {
+      "0": {
+        "range": [
+          0.0,
+          0.2
+        ],
+        "n": 70,
+        "exact_match": 0.11428571428571428,
+        "ocr_em": 0.11428571428571428,
+        "ocr_n": 70,
+        "shape_em": null,
+        "shape_n": 0
+      },
+      "1": {
+        "range": [
+          0.2,
+          0.4
+        ],
+        "n": 115,
+        "exact_match": 0.2,
+        "ocr_em": 0.2,
+        "ocr_n": 115,
+        "shape_em": null,
+        "shape_n": 0
+      },
+      "2": {
+        "range": [
+          0.4,
+          0.6
+        ],
+        "n": 137,
+        "exact_match": 0.145985401459854,
+        "ocr_em": 0.145985401459854,
+        "ocr_n": 137,
+        "shape_em": null,
+        "shape_n": 0
+      },
+      "3": {
+        "range": [
+          0.6,
+          0.8
+        ],
+        "n": 279,
+        "exact_match": 0.12903225806451613,
+        "ocr_em": 0.12903225806451613,
+        "ocr_n": 279,
+        "shape_em": null,
+        "shape_n": 0
+      },
+      "4": {
+        "range": [
+          0.8,
+          1.0
+        ],
+        "n": 1907,
+        "exact_match": 0.15312008390141585,
+        "ocr_em": 0.15312008390141585,
+        "ocr_n": 1907,
+        "shape_em": null,
+        "shape_n": 0
+      }
+    }
+  },
+  "examples": [
+    {
+      "image_id": 155000,
+      "alpha": 0.5466,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "IJBFV",
+      "pred": "JFBV"
+    },
+    {
+      "image_id": 155003,
+      "alpha": 0.5877,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "XRYP",
+      "pred": "XRYP"
+    },
+    {
+      "image_id": 155006,
+      "alpha": 1.0,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "WFgMzt",
+      "pred": "WFgmtZ"
+    },
+    {
+      "image_id": 155007,
+      "alpha": 1.0,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "wsu",
+      "pred": "wsu"
+    },
+    {
+      "image_id": 155008,
+      "alpha": 0.9306,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "opviby",
+      "pred": "opivYQ"
+    },
+    {
+      "image_id": 155009,
+      "alpha": 0.9984,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "detl",
+      "pred": "detl"
+    },
+    {
+      "image_id": 155011,
+      "alpha": 0.7994,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "ocrzwr",
+      "pred": "ocrzwn"
+    },
+    {
+      "image_id": 155012,
+      "alpha": 0.9945,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "cezmic",
+      "pred": "cezmc"
+    },
+    {
+      "image_id": 155013,
+      "alpha": 0.506,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "MTpyZs",
+      "pred": "MtpYZS"
+    },
+    {
+      "image_id": 155019,
+      "alpha": 0.2237,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "ejs",
+      "pred": "ejs"
+    },
+    {
+      "image_id": 155021,
+      "alpha": 0.9981,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "tldzd",
+      "pred": "tldzd"
+    },
+    {
+      "image_id": 155025,
+      "alpha": 0.7808,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "dsKgq",
+      "pred": "dskgq"
+    },
+    {
+      "image_id": 155028,
+      "alpha": 0.9998,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "KQLTX",
+      "pred": "KOLTX"
+    },
+    {
+      "image_id": 155030,
+      "alpha": 1.0,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "TTV",
+      "pred": "TVI"
+    },
+    {
+      "image_id": 155034,
+      "alpha": 0.0402,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "",
+      "pred": ""
+    },
+    {
+      "image_id": 155038,
+      "alpha": 0.9122,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "yoZxS",
+      "pred": "yozxs"
+    },
+    {
+      "image_id": 155039,
+      "alpha": 1.0,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "algTKN",
+      "pred": "atLkGN"
+    },
+    {
+      "image_id": 155042,
+      "alpha": 0.9982,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "llZrjY",
+      "pred": "IZRYY"
+    },
+    {
+      "image_id": 155043,
+      "alpha": 1.0,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "biqua",
+      "pred": "biuqa"
+    },
+    {
+      "image_id": 155046,
+      "alpha": 0.908,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "",
+      "pred": ""
+    },
+    {
+      "image_id": 155047,
+      "alpha": 0.5219,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "wlkak",
+      "pred": "wlqka"
+    },
+    {
+      "image_id": 155050,
+      "alpha": 0.7601,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "AWPznr",
+      "pred": "awnzpr"
+    },
+    {
+      "image_id": 155051,
+      "alpha": 0.966,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "",
+      "pred": ""
+    },
+    {
+      "image_id": 155052,
+      "alpha": 0.526,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "bdzxc",
+      "pred": "bdxzc"
+    },
+    {
+      "image_id": 155053,
+      "alpha": 0.4823,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "PFJ",
+      "pred": "PFJ"
+    }
+  ],
+  "world_size": 1,
+  "effective_batch_size": 64
+}

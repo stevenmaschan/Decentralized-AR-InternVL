@@ -1,0 +1,1694 @@
+{
+  "args": {
+    "annotations": "synthetic_data/sweep_datasets/scale_150k/annotations.jsonl",
+    "features": "synthetic_data/sweep_datasets/scale_150k/features_vit_base_patch16.npy",
+    "keys": null,
+    "out_dir": "synthetic_data/vlm/final_150k/moe_layerwise.tmp",
+    "val_frac": 0.1,
+    "test_frac": 0.1,
+    "split_seed": 0,
+    "max_train": 150000,
+    "tokenizer": null,
+    "feature_norm": "standardize",
+    "no_vision": false,
+    "d_model": 128,
+    "n_layers": 4,
+    "n_heads": 4,
+    "n_prefix": 4,
+    "dropout": 0.1,
+    "moe_experts": 2,
+    "moe_aux_coef": 0.01,
+    "epochs": 50,
+    "batch_size": 128,
+    "lr": 0.0003,
+    "weight_decay": 0.01,
+    "warmup_frac": 0.03,
+    "grad_clip": 1.0,
+    "eval_every": 5,
+    "num_workers": 4,
+    "device": "cuda:0",
+    "seed": 0
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 1.662627245800472,
+      "aux_loss": 1.0183480275583308,
+      "expert_fractions": [
+        [
+          0.5209,
+          0.4791
+        ],
+        [
+          0.5063,
+          0.4937
+        ],
+        [
+          0.3763,
+          0.6237
+        ],
+        [
+          0.4154,
+          0.5846
+        ]
+      ]
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.4578718449865041,
+      "aux_loss": 1.019458073922246,
+      "expert_fractions": [
+        [
+          0.4233,
+          0.5767
+        ],
+        [
+          0.4114,
+          0.5886
+        ],
+        [
+          0.3797,
+          0.6203
+        ],
+        [
+          0.4185,
+          0.5815
+        ]
+      ]
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.3248770443047487,
+      "aux_loss": 1.0102799475243924,
+      "expert_fractions": [
+        [
+          0.4379,
+          0.5621
+        ],
+        [
+          0.4235,
+          0.5765
+        ],
+        [
+          0.397,
+          0.603
+        ],
+        [
+          0.5128,
+          0.4872
+        ]
+      ]
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.28278582207162917,
+      "aux_loss": 1.005973794743304,
+      "expert_fractions": [
+        [
+          0.438,
+          0.562
+        ],
+        [
+          0.4278,
+          0.5722
+        ],
+        [
+          0.4994,
+          0.5006
+        ],
+        [
+          0.519,
+          0.481
+        ]
+      ]
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.2575235041482183,
+      "aux_loss": 1.0049113381326351,
+      "expert_fractions": [
+        [
+          0.4123,
+          0.5877
+        ],
+        [
+          0.4673,
+          0.5327
+        ],
+        [
+          0.4973,
+          0.5027
+        ],
+        [
+          0.5271,
+          0.4729
+        ]
+      ],
+      "val_loss": 0.23522331918465825,
+      "val_exact_match": 0.5756
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.2387218754920629,
+      "aux_loss": 1.0042580389548936,
+      "expert_fractions": [
+        [
+          0.456,
+          0.544
+        ],
+        [
+          0.4652,
+          0.5348
+        ],
+        [
+          0.5098,
+          0.4902
+        ],
+        [
+          0.499,
+          0.501
+        ]
+      ]
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.22510463952834803,
+      "aux_loss": 1.00443287780405,
+      "expert_fractions": [
+        [
+          0.4451,
+          0.5549
+        ],
+        [
+          0.4474,
+          0.5526
+        ],
+        [
+          0.521,
+          0.479
+        ],
+        [
+          0.5127,
+          0.4873
+        ]
+      ]
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.21379936944748493,
+      "aux_loss": 1.0036882740834348,
+      "expert_fractions": [
+        [
+          0.5385,
+          0.4615
+        ],
+        [
+          0.4565,
+          0.5435
+        ],
+        [
+          0.4902,
+          0.5098
+        ],
+        [
+          0.5124,
+          0.4876
+        ]
+      ]
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.2045995273978922,
+      "aux_loss": 1.003335075384526,
+      "expert_fractions": [
+        [
+          0.4339,
+          0.5661
+        ],
+        [
+          0.5304,
+          0.4696
+        ],
+        [
+          0.454,
+          0.546
+        ],
+        [
+          0.5003,
+          0.4997
+        ]
+      ]
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.19626286667791304,
+      "aux_loss": 1.0032422837286703,
+      "expert_fractions": [
+        [
+          0.4841,
+          0.5159
+        ],
+        [
+          0.4451,
+          0.5549
+        ],
+        [
+          0.4156,
+          0.5844
+        ],
+        [
+          0.5186,
+          0.4814
+        ]
+      ],
+      "val_loss": 0.19801058465750337,
+      "val_exact_match": 0.6272
+    },
+    {
+      "epoch": 11,
+      "train_loss": 0.18890020298315108,
+      "aux_loss": 1.003604295109196,
+      "expert_fractions": [
+        [
+          0.4403,
+          0.5597
+        ],
+        [
+          0.479,
+          0.521
+        ],
+        [
+          0.401,
+          0.599
+        ],
+        [
+          0.4617,
+          0.5383
+        ]
+      ]
+    },
+    {
+      "epoch": 12,
+      "train_loss": 0.1818860975655463,
+      "aux_loss": 1.0029689853360366,
+      "expert_fractions": [
+        [
+          0.4206,
+          0.5794
+        ],
+        [
+          0.4492,
+          0.5508
+        ],
+        [
+          0.4952,
+          0.5048
+        ],
+        [
+          0.4415,
+          0.5585
+        ]
+      ]
+    },
+    {
+      "epoch": 13,
+      "train_loss": 0.17635409883549083,
+      "aux_loss": 1.0027113740613174,
+      "expert_fractions": [
+        [
+          0.5234,
+          0.4766
+        ],
+        [
+          0.4642,
+          0.5358
+        ],
+        [
+          0.4663,
+          0.5337
+        ],
+        [
+          0.5434,
+          0.4566
+        ]
+      ]
+    },
+    {
+      "epoch": 14,
+      "train_loss": 0.17059408522389147,
+      "aux_loss": 1.0021940346562281,
+      "expert_fractions": [
+        [
+          0.4465,
+          0.5535
+        ],
+        [
+          0.5003,
+          0.4997
+        ],
+        [
+          0.523,
+          0.477
+        ],
+        [
+          0.563,
+          0.437
+        ]
+      ]
+    },
+    {
+      "epoch": 15,
+      "train_loss": 0.1652405782470606,
+      "aux_loss": 1.002512124590544,
+      "expert_fractions": [
+        [
+          0.521,
+          0.479
+        ],
+        [
+          0.4429,
+          0.5571
+        ],
+        [
+          0.4113,
+          0.5887
+        ],
+        [
+          0.4481,
+          0.5519
+        ]
+      ],
+      "val_loss": 0.18878195133176598,
+      "val_exact_match": 0.6418
+    },
+    {
+      "epoch": 16,
+      "train_loss": 0.16021075910138005,
+      "aux_loss": 1.002961637472923,
+      "expert_fractions": [
+        [
+          0.5046,
+          0.4954
+        ],
+        [
+          0.4768,
+          0.5232
+        ],
+        [
+          0.4734,
+          0.5266
+        ],
+        [
+          0.4926,
+          0.5074
+        ]
+      ]
+    },
+    {
+      "epoch": 17,
+      "train_loss": 0.155784987216981,
+      "aux_loss": 1.002628708119885,
+      "expert_fractions": [
+        [
+          0.4749,
+          0.5251
+        ],
+        [
+          0.4988,
+          0.5012
+        ],
+        [
+          0.4927,
+          0.5073
+        ],
+        [
+          0.5464,
+          0.4536
+        ]
+      ]
+    },
+    {
+      "epoch": 18,
+      "train_loss": 0.15123180789501348,
+      "aux_loss": 1.002361625814723,
+      "expert_fractions": [
+        [
+          0.4379,
+          0.5621
+        ],
+        [
+          0.4836,
+          0.5164
+        ],
+        [
+          0.4724,
+          0.5276
+        ],
+        [
+          0.4985,
+          0.5015
+        ]
+      ]
+    },
+    {
+      "epoch": 19,
+      "train_loss": 0.14697920738245687,
+      "aux_loss": 1.0024572068763329,
+      "expert_fractions": [
+        [
+          0.4285,
+          0.5715
+        ],
+        [
+          0.4812,
+          0.5188
+        ],
+        [
+          0.4208,
+          0.5792
+        ],
+        [
+          0.4604,
+          0.5396
+        ]
+      ]
+    },
+    {
+      "epoch": 20,
+      "train_loss": 0.14316381352573354,
+      "aux_loss": 1.0025226194363797,
+      "expert_fractions": [
+        [
+          0.4751,
+          0.5249
+        ],
+        [
+          0.4712,
+          0.5288
+        ],
+        [
+          0.5181,
+          0.4819
+        ],
+        [
+          0.5416,
+          0.4584
+        ]
+      ],
+      "val_loss": 0.18337816557977493,
+      "val_exact_match": 0.656
+    },
+    {
+      "epoch": 21,
+      "train_loss": 0.13926466199129023,
+      "aux_loss": 1.002772304260456,
+      "expert_fractions": [
+        [
+          0.4911,
+          0.5089
+        ],
+        [
+          0.4476,
+          0.5524
+        ],
+        [
+          0.4945,
+          0.5055
+        ],
+        [
+          0.4699,
+          0.5301
+        ]
+      ]
+    },
+    {
+      "epoch": 22,
+      "train_loss": 0.13445379168210736,
+      "aux_loss": 1.0022505822088044,
+      "expert_fractions": [
+        [
+          0.525,
+          0.475
+        ],
+        [
+          0.4791,
+          0.5209
+        ],
+        [
+          0.5117,
+          0.4883
+        ],
+        [
+          0.5367,
+          0.4633
+        ]
+      ]
+    },
+    {
+      "epoch": 23,
+      "train_loss": 0.13125085323002403,
+      "aux_loss": 1.0021315800848423,
+      "expert_fractions": [
+        [
+          0.4614,
+          0.5386
+        ],
+        [
+          0.4767,
+          0.5233
+        ],
+        [
+          0.5218,
+          0.4782
+        ],
+        [
+          0.55,
+          0.45
+        ]
+      ]
+    },
+    {
+      "epoch": 24,
+      "train_loss": 0.12753262723845438,
+      "aux_loss": 1.0021247581780008,
+      "expert_fractions": [
+        [
+          0.4383,
+          0.5617
+        ],
+        [
+          0.4844,
+          0.5156
+        ],
+        [
+          0.4967,
+          0.5033
+        ],
+        [
+          0.4652,
+          0.5348
+        ]
+      ]
+    },
+    {
+      "epoch": 25,
+      "train_loss": 0.12417551828585839,
+      "aux_loss": 1.0022476326696492,
+      "expert_fractions": [
+        [
+          0.5255,
+          0.4745
+        ],
+        [
+          0.506,
+          0.494
+        ],
+        [
+          0.5532,
+          0.4468
+        ],
+        [
+          0.4709,
+          0.5291
+        ]
+      ],
+      "val_loss": 0.18651354201105988,
+      "val_exact_match": 0.6582
+    },
+    {
+      "epoch": 26,
+      "train_loss": 0.12048833523168448,
+      "aux_loss": 1.0021687575530842,
+      "expert_fractions": [
+        [
+          0.5134,
+          0.4866
+        ],
+        [
+          0.4749,
+          0.5251
+        ],
+        [
+          0.4428,
+          0.5572
+        ],
+        [
+          0.4965,
+          0.5035
+        ]
+      ]
+    },
+    {
+      "epoch": 27,
+      "train_loss": 0.11755515966630964,
+      "aux_loss": 1.002099266121471,
+      "expert_fractions": [
+        [
+          0.5368,
+          0.4632
+        ],
+        [
+          0.4893,
+          0.5107
+        ],
+        [
+          0.5226,
+          0.4774
+        ],
+        [
+          0.5577,
+          0.4423
+        ]
+      ]
+    },
+    {
+      "epoch": 28,
+      "train_loss": 0.11413454664081704,
+      "aux_loss": 1.0021019949045677,
+      "expert_fractions": [
+        [
+          0.554,
+          0.446
+        ],
+        [
+          0.4875,
+          0.5125
+        ],
+        [
+          0.5015,
+          0.4985
+        ],
+        [
+          0.5211,
+          0.4789
+        ]
+      ]
+    },
+    {
+      "epoch": 29,
+      "train_loss": 0.11095361675556768,
+      "aux_loss": 1.002289566395122,
+      "expert_fractions": [
+        [
+          0.4681,
+          0.5319
+        ],
+        [
+          0.4665,
+          0.5335
+        ],
+        [
+          0.4955,
+          0.5045
+        ],
+        [
+          0.5109,
+          0.4891
+        ]
+      ]
+    },
+    {
+      "epoch": 30,
+      "train_loss": 0.10773451283837017,
+      "aux_loss": 1.0021037234392662,
+      "expert_fractions": [
+        [
+          0.5091,
+          0.4909
+        ],
+        [
+          0.4871,
+          0.5129
+        ],
+        [
+          0.4889,
+          0.5111
+        ],
+        [
+          0.4929,
+          0.5071
+        ]
+      ],
+      "val_loss": 0.18906779808536908,
+      "val_exact_match": 0.6652
+    },
+    {
+      "epoch": 31,
+      "train_loss": 0.10501499816267597,
+      "aux_loss": 1.0016625786214481,
+      "expert_fractions": [
+        [
+          0.5145,
+          0.4855
+        ],
+        [
+          0.5134,
+          0.4866
+        ],
+        [
+          0.5342,
+          0.4658
+        ],
+        [
+          0.4796,
+          0.5204
+        ]
+      ]
+    },
+    {
+      "epoch": 32,
+      "train_loss": 0.10218913576469424,
+      "aux_loss": 1.0017284075486976,
+      "expert_fractions": [
+        [
+          0.5182,
+          0.4818
+        ],
+        [
+          0.4846,
+          0.5154
+        ],
+        [
+          0.4637,
+          0.5363
+        ],
+        [
+          0.5619,
+          0.4381
+        ]
+      ]
+    },
+    {
+      "epoch": 33,
+      "train_loss": 0.09963369898479192,
+      "aux_loss": 1.0019513420525217,
+      "expert_fractions": [
+        [
+          0.4993,
+          0.5007
+        ],
+        [
+          0.4851,
+          0.5149
+        ],
+        [
+          0.4601,
+          0.5399
+        ],
+        [
+          0.559,
+          0.441
+        ]
+      ]
+    },
+    {
+      "epoch": 34,
+      "train_loss": 0.09746383551223958,
+      "aux_loss": 1.0018436384445373,
+      "expert_fractions": [
+        [
+          0.468,
+          0.532
+        ],
+        [
+          0.5142,
+          0.4858
+        ],
+        [
+          0.4868,
+          0.5132
+        ],
+        [
+          0.5368,
+          0.4632
+        ]
+      ]
+    },
+    {
+      "epoch": 35,
+      "train_loss": 0.09473341048827613,
+      "aux_loss": 1.0017045886978748,
+      "expert_fractions": [
+        [
+          0.4764,
+          0.5236
+        ],
+        [
+          0.5007,
+          0.4993
+        ],
+        [
+          0.4727,
+          0.5273
+        ],
+        [
+          0.4998,
+          0.5002
+        ]
+      ],
+      "val_loss": 0.19292798185415136,
+      "val_exact_match": 0.6608
+    },
+    {
+      "epoch": 36,
+      "train_loss": 0.09280229078016157,
+      "aux_loss": 1.0017211452495534,
+      "expert_fractions": [
+        [
+          0.456,
+          0.544
+        ],
+        [
+          0.4817,
+          0.5183
+        ],
+        [
+          0.5086,
+          0.4914
+        ],
+        [
+          0.5081,
+          0.4919
+        ]
+      ]
+    },
+    {
+      "epoch": 37,
+      "train_loss": 0.09086668728696425,
+      "aux_loss": 1.0020393814722968,
+      "expert_fractions": [
+        [
+          0.5039,
+          0.4961
+        ],
+        [
+          0.4852,
+          0.5148
+        ],
+        [
+          0.4739,
+          0.5261
+        ],
+        [
+          0.5519,
+          0.4481
+        ]
+      ]
+    },
+    {
+      "epoch": 38,
+      "train_loss": 0.08840077200256771,
+      "aux_loss": 1.001821946120486,
+      "expert_fractions": [
+        [
+          0.5215,
+          0.4785
+        ],
+        [
+          0.5229,
+          0.4771
+        ],
+        [
+          0.5391,
+          0.4609
+        ],
+        [
+          0.4617,
+          0.5383
+        ]
+      ]
+    },
+    {
+      "epoch": 39,
+      "train_loss": 0.08689524768876469,
+      "aux_loss": 1.0015856927017388,
+      "expert_fractions": [
+        [
+          0.5214,
+          0.4786
+        ],
+        [
+          0.5003,
+          0.4997
+        ],
+        [
+          0.5282,
+          0.4718
+        ],
+        [
+          0.5034,
+          0.4966
+        ]
+      ]
+    },
+    {
+      "epoch": 40,
+      "train_loss": 0.08499574473880983,
+      "aux_loss": 1.001753057250602,
+      "expert_fractions": [
+        [
+          0.4596,
+          0.5404
+        ],
+        [
+          0.4839,
+          0.5161
+        ],
+        [
+          0.4473,
+          0.5527
+        ],
+        [
+          0.5014,
+          0.4986
+        ]
+      ],
+      "val_loss": 0.1949347899812969,
+      "val_exact_match": 0.6672
+    },
+    {
+      "epoch": 41,
+      "train_loss": 0.08355097177484672,
+      "aux_loss": 1.0015195135781136,
+      "expert_fractions": [
+        [
+          0.5379,
+          0.4621
+        ],
+        [
+          0.5069,
+          0.4931
+        ],
+        [
+          0.4978,
+          0.5022
+        ],
+        [
+          0.4967,
+          0.5033
+        ]
+      ]
+    },
+    {
+      "epoch": 42,
+      "train_loss": 0.08210535838342162,
+      "aux_loss": 1.0016724400088688,
+      "expert_fractions": [
+        [
+          0.5,
+          0.5
+        ],
+        [
+          0.5216,
+          0.4784
+        ],
+        [
+          0.4714,
+          0.5286
+        ],
+        [
+          0.4737,
+          0.5263
+        ]
+      ]
+    },
+    {
+      "epoch": 43,
+      "train_loss": 0.08109847234344424,
+      "aux_loss": 1.0016337951261909,
+      "expert_fractions": [
+        [
+          0.513,
+          0.487
+        ],
+        [
+          0.4998,
+          0.5002
+        ],
+        [
+          0.476,
+          0.524
+        ],
+        [
+          0.4927,
+          0.5073
+        ]
+      ]
+    },
+    {
+      "epoch": 44,
+      "train_loss": 0.07998911638805355,
+      "aux_loss": 1.0016180596017716,
+      "expert_fractions": [
+        [
+          0.5197,
+          0.4803
+        ],
+        [
+          0.5134,
+          0.4866
+        ],
+        [
+          0.4926,
+          0.5074
+        ],
+        [
+          0.5077,
+          0.4923
+        ]
+      ]
+    },
+    {
+      "epoch": 45,
+      "train_loss": 0.07921894998480611,
+      "aux_loss": 1.0015837573577562,
+      "expert_fractions": [
+        [
+          0.5111,
+          0.4889
+        ],
+        [
+          0.4987,
+          0.5013
+        ],
+        [
+          0.491,
+          0.509
+        ],
+        [
+          0.4618,
+          0.5382
+        ]
+      ],
+      "val_loss": 0.19699620196010853,
+      "val_exact_match": 0.6668
+    },
+    {
+      "epoch": 46,
+      "train_loss": 0.07855791840108621,
+      "aux_loss": 1.0016214393022018,
+      "expert_fractions": [
+        [
+          0.4871,
+          0.5129
+        ],
+        [
+          0.4984,
+          0.5016
+        ],
+        [
+          0.5069,
+          0.4931
+        ],
+        [
+          0.521,
+          0.479
+        ]
+      ]
+    },
+    {
+      "epoch": 47,
+      "train_loss": 0.07830080298700617,
+      "aux_loss": 1.0016988147333277,
+      "expert_fractions": [
+        [
+          0.5156,
+          0.4844
+        ],
+        [
+          0.4963,
+          0.5037
+        ],
+        [
+          0.5394,
+          0.4606
+        ],
+        [
+          0.553,
+          0.447
+        ]
+      ]
+    },
+    {
+      "epoch": 48,
+      "train_loss": 0.07752323279159193,
+      "aux_loss": 1.0015468078225622,
+      "expert_fractions": [
+        [
+          0.5103,
+          0.4897
+        ],
+        [
+          0.5211,
+          0.4789
+        ],
+        [
+          0.5555,
+          0.4445
+        ],
+        [
+          0.5845,
+          0.4155
+        ]
+      ]
+    },
+    {
+      "epoch": 49,
+      "train_loss": 0.07766519823655753,
+      "aux_loss": 1.0015883380077926,
+      "expert_fractions": [
+        [
+          0.4998,
+          0.5002
+        ],
+        [
+          0.5039,
+          0.4961
+        ],
+        [
+          0.4844,
+          0.5156
+        ],
+        [
+          0.5389,
+          0.4611
+        ]
+      ]
+    },
+    {
+      "epoch": 50,
+      "train_loss": 0.07762672553870394,
+      "aux_loss": 1.0015527832009261,
+      "expert_fractions": [
+        [
+          0.4913,
+          0.5087
+        ],
+        [
+          0.501,
+          0.499
+        ],
+        [
+          0.4975,
+          0.5025
+        ],
+        [
+          0.5372,
+          0.4628
+        ]
+      ],
+      "val_loss": 0.19754210533133787,
+      "val_exact_match": 0.666
+    }
+  ],
+  "best": {
+    "val_em": 0.6672,
+    "epoch": 40
+  },
+  "val": {
+    "exact_match": 0.6672,
+    "n": 5000,
+    "per_task": {
+      "1": {
+        "name": "ocr",
+        "n": 2477,
+        "exact_match": 0.5696406943883731,
+        "cer": 0.18524424707307144
+      },
+      "2": {
+        "name": "count_by_type",
+        "n": 846,
+        "exact_match": 0.793144208037825,
+        "mae": 0.22458628841607564,
+        "unparseable": 0
+      },
+      "4": {
+        "name": "name_types",
+        "n": 853,
+        "exact_match": 0.7080890973036342,
+        "set_f1": 0.9445670911087092
+      },
+      "5": {
+        "name": "count_by_angles",
+        "n": 824,
+        "exact_match": 0.7888349514563107,
+        "mae": 0.22451456310679613,
+        "unparseable": 0
+      }
+    },
+    "per_alpha_bin": {
+      "0": {
+        "range": [
+          0.0,
+          0.2
+        ],
+        "n": 1991,
+        "exact_match": 0.7764942240080361,
+        "ocr_em": 0.37209302325581395,
+        "ocr_n": 86,
+        "shape_em": 0.794750656167979,
+        "shape_n": 1905
+      },
+      "1": {
+        "range": [
+          0.2,
+          0.4
+        ],
+        "n": 337,
+        "exact_match": 0.6646884272997032,
+        "ocr_em": 0.5619047619047619,
+        "ocr_n": 105,
+        "shape_em": 0.7112068965517241,
+        "shape_n": 232
+      },
+      "2": {
+        "range": [
+          0.4,
+          0.6
+        ],
+        "n": 342,
+        "exact_match": 0.6198830409356725,
+        "ocr_em": 0.5,
+        "ocr_n": 156,
+        "shape_em": 0.7204301075268817,
+        "shape_n": 186
+      },
+      "3": {
+        "range": [
+          0.6,
+          0.8
+        ],
+        "n": 388,
+        "exact_match": 0.6005154639175257,
+        "ocr_em": 0.6,
+        "ocr_n": 260,
+        "shape_em": 0.6015625,
+        "shape_n": 128
+      },
+      "4": {
+        "range": [
+          0.8,
+          1.0
+        ],
+        "n": 1942,
+        "exact_match": 0.5772399588053553,
+        "ocr_em": 0.5807486631016042,
+        "ocr_n": 1870,
+        "shape_em": 0.4861111111111111,
+        "shape_n": 72
+      }
+    }
+  },
+  "test": {
+    "exact_match": 0.6768,
+    "n": 5000,
+    "per_task": {
+      "1": {
+        "name": "ocr",
+        "n": 2508,
+        "exact_match": 0.5889154704944178,
+        "cer": 0.1718899521531091
+      },
+      "2": {
+        "name": "count_by_type",
+        "n": 821,
+        "exact_match": 0.7904993909866017,
+        "mae": 0.22168087697929353,
+        "unparseable": 0
+      },
+      "4": {
+        "name": "name_types",
+        "n": 795,
+        "exact_match": 0.7471698113207547,
+        "set_f1": 0.9572097434361597
+      },
+      "5": {
+        "name": "count_by_angles",
+        "n": 876,
+        "exact_match": 0.7579908675799086,
+        "mae": 0.2648401826484018,
+        "unparseable": 0
+      }
+    },
+    "per_alpha_bin": {
+      "0": {
+        "range": [
+          0.0,
+          0.2
+        ],
+        "n": 1947,
+        "exact_match": 0.7817154596815614,
+        "ocr_em": 0.2571428571428571,
+        "ocr_n": 70,
+        "shape_em": 0.8012786361214704,
+        "shape_n": 1877
+      },
+      "1": {
+        "range": [
+          0.2,
+          0.4
+        ],
+        "n": 388,
+        "exact_match": 0.6288659793814433,
+        "ocr_em": 0.4782608695652174,
+        "ocr_n": 115,
+        "shape_em": 0.6923076923076923,
+        "shape_n": 273
+      },
+      "2": {
+        "range": [
+          0.4,
+          0.6
+        ],
+        "n": 297,
+        "exact_match": 0.632996632996633,
+        "ocr_em": 0.5547445255474452,
+        "ocr_n": 137,
+        "shape_em": 0.7,
+        "shape_n": 160
+      },
+      "3": {
+        "range": [
+          0.6,
+          0.8
+        ],
+        "n": 401,
+        "exact_match": 0.57356608478803,
+        "ocr_em": 0.5842293906810035,
+        "ocr_n": 279,
+        "shape_em": 0.5491803278688525,
+        "shape_n": 122
+      },
+      "4": {
+        "range": [
+          0.8,
+          1.0
+        ],
+        "n": 1967,
+        "exact_match": 0.6100660904931368,
+        "ocr_em": 0.610907184058731,
+        "ocr_n": 1907,
+        "shape_em": 0.5833333333333334,
+        "shape_n": 60
+      }
+    }
+  },
+  "test_majority_baseline": {
+    "exact_match": 0.2038,
+    "n": 5000,
+    "per_task": {
+      "1": {
+        "name": "ocr",
+        "n": 2508,
+        "exact_match": 0.1511164274322169,
+        "cer": 0.8488835725677831
+      },
+      "2": {
+        "name": "count_by_type",
+        "n": 821,
+        "exact_match": 0.48112058465286234,
+        "mae": 0.6236297198538368,
+        "unparseable": 0
+      },
+      "4": {
+        "name": "name_types",
+        "n": 795,
+        "exact_match": 0.0729559748427673,
+        "set_f1": 0.7175605107680614
+      },
+      "5": {
+        "name": "count_by_angles",
+        "n": 876,
+        "exact_match": 0.2134703196347032,
+        "mae": 1.9417808219178083,
+        "unparseable": 0
+      }
+    },
+    "per_alpha_bin": {
+      "0": {
+        "range": [
+          0.0,
+          0.2
+        ],
+        "n": 1947,
+        "exact_match": 0.25218284540318436,
+        "ocr_em": 0.11428571428571428,
+        "ocr_n": 70,
+        "shape_em": 0.25732551944592436,
+        "shape_n": 1877
+      },
+      "1": {
+        "range": [
+          0.2,
+          0.4
+        ],
+        "n": 388,
+        "exact_match": 0.22422680412371135,
+        "ocr_em": 0.2,
+        "ocr_n": 115,
+        "shape_em": 0.23443223443223443,
+        "shape_n": 273
+      },
+      "2": {
+        "range": [
+          0.4,
+          0.6
+        ],
+        "n": 297,
+        "exact_match": 0.20202020202020202,
+        "ocr_em": 0.145985401459854,
+        "ocr_n": 137,
+        "shape_em": 0.25,
+        "shape_n": 160
+      },
+      "3": {
+        "range": [
+          0.6,
+          0.8
+        ],
+        "n": 401,
+        "exact_match": 0.17955112219451372,
+        "ocr_em": 0.12903225806451613,
+        "ocr_n": 279,
+        "shape_em": 0.29508196721311475,
+        "shape_n": 122
+      },
+      "4": {
+        "range": [
+          0.8,
+          1.0
+        ],
+        "n": 1967,
+        "exact_match": 0.15709201830198272,
+        "ocr_em": 0.15312008390141585,
+        "ocr_n": 1907,
+        "shape_em": 0.2833333333333333,
+        "shape_n": 60
+      }
+    }
+  },
+  "examples": [
+    {
+      "image_id": 155000,
+      "alpha": 0.5466,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "IJBFV",
+      "pred": "JFBVF"
+    },
+    {
+      "image_id": 155001,
+      "alpha": 0.1731,
+      "task_id": 2,
+      "question": "How many hexagons are on the image?",
+      "gold": "2",
+      "pred": "2"
+    },
+    {
+      "image_id": 155002,
+      "alpha": 0.0,
+      "task_id": 4,
+      "question": "Name types of shapes you see on the image.",
+      "gold": "triangle, ellipse, rectangle, hexagon",
+      "pred": "triangle, ellipse, rectangle, hexagon"
+    },
+    {
+      "image_id": 155003,
+      "alpha": 0.5877,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "XRYP",
+      "pred": "XRYP"
+    },
+    {
+      "image_id": 155004,
+      "alpha": 0.0001,
+      "task_id": 2,
+      "question": "How many circles are on the image?",
+      "gold": "1",
+      "pred": "1"
+    },
+    {
+      "image_id": 155005,
+      "alpha": 0.2442,
+      "task_id": 5,
+      "question": "How many shapes have at least 3 angles?",
+      "gold": "5",
+      "pred": "5"
+    },
+    {
+      "image_id": 155006,
+      "alpha": 1.0,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "WFgMzt",
+      "pred": "WFgmZ"
+    },
+    {
+      "image_id": 155007,
+      "alpha": 1.0,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "wsu",
+      "pred": "wsu"
+    },
+    {
+      "image_id": 155008,
+      "alpha": 0.9306,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "opviby",
+      "pred": "opIiVy"
+    },
+    {
+      "image_id": 155009,
+      "alpha": 0.9984,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "detl",
+      "pred": "detl"
+    },
+    {
+      "image_id": 155010,
+      "alpha": 0.0,
+      "task_id": 5,
+      "question": "How many shapes have at least 6 angles?",
+      "gold": "1",
+      "pred": "1"
+    },
+    {
+      "image_id": 155011,
+      "alpha": 0.7994,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "ocrzwr",
+      "pred": "ocrzwr"
+    },
+    {
+      "image_id": 155012,
+      "alpha": 0.9945,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "cezmic",
+      "pred": "cezmc"
+    },
+    {
+      "image_id": 155013,
+      "alpha": 0.506,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "MTpyZs",
+      "pred": "MTPYZS"
+    },
+    {
+      "image_id": 155014,
+      "alpha": 0.2387,
+      "task_id": 5,
+      "question": "How many shapes have at least 4 angles?",
+      "gold": "0",
+      "pred": "0"
+    },
+    {
+      "image_id": 155015,
+      "alpha": 0.0005,
+      "task_id": 4,
+      "question": "Name types of shapes you see on the image.",
+      "gold": "rectangle",
+      "pred": "rectangle"
+    },
+    {
+      "image_id": 155016,
+      "alpha": 0.0,
+      "task_id": 5,
+      "question": "How many shapes have at least 4 angles?",
+      "gold": "0",
+      "pred": "0"
+    },
+    {
+      "image_id": 155017,
+      "alpha": 0.5885,
+      "task_id": 5,
+      "question": "How many shapes have at least 6 angles?",
+      "gold": "0",
+      "pred": "0"
+    },
+    {
+      "image_id": 155018,
+      "alpha": 0.0594,
+      "task_id": 5,
+      "question": "How many shapes have at least 6 angles?",
+      "gold": "1",
+      "pred": "2"
+    },
+    {
+      "image_id": 155019,
+      "alpha": 0.2237,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "ejs",
+      "pred": "EJS"
+    },
+    {
+      "image_id": 155020,
+      "alpha": 0.0,
+      "task_id": 5,
+      "question": "How many shapes have at least 4 angles?",
+      "gold": "0",
+      "pred": "0"
+    },
+    {
+      "image_id": 155021,
+      "alpha": 0.9981,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "tldzd",
+      "pred": "tldzd"
+    },
+    {
+      "image_id": 155022,
+      "alpha": 0.4249,
+      "task_id": 4,
+      "question": "Name types of shapes you see on the image.",
+      "gold": "circle, triangle, square",
+      "pred": "circle, triangle, square, rectangle"
+    },
+    {
+      "image_id": 155023,
+      "alpha": 0.0221,
+      "task_id": 2,
+      "question": "How many triangles are on the image?",
+      "gold": "1",
+      "pred": "1"
+    },
+    {
+      "image_id": 155024,
+      "alpha": 0.0001,
+      "task_id": 2,
+      "question": "How many ellipses are on the image?",
+      "gold": "1",
+      "pred": "1"
+    }
+  ],
+  "world_size": 1,
+  "effective_batch_size": 128
+}

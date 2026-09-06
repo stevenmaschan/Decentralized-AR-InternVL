@@ -1,0 +1,672 @@
+{
+  "args": {
+    "annotations": "synthetic_data/sweep_datasets/scale_150k/experts_alpha/expert_alpha_hi/annotations.jsonl",
+    "features": "synthetic_data/sweep_datasets/scale_150k/features_vit_base_patch16.npy",
+    "keys": null,
+    "out_dir": "synthetic_data/vlm/final_150k/alpha_hi.tmp",
+    "val_frac": 0.1,
+    "test_frac": 0.1,
+    "split_seed": 0,
+    "max_train": 150000,
+    "tokenizer": null,
+    "feature_norm": "standardize",
+    "no_vision": false,
+    "d_model": 128,
+    "n_layers": 4,
+    "n_heads": 4,
+    "n_prefix": 4,
+    "dropout": 0.1,
+    "moe_experts": 1,
+    "moe_aux_coef": 0.01,
+    "epochs": 50,
+    "batch_size": 64,
+    "lr": 0.0003,
+    "weight_decay": 0.01,
+    "warmup_frac": 0.03,
+    "grad_clip": 1.0,
+    "eval_every": 5,
+    "num_workers": 4,
+    "device": "cuda:0",
+    "seed": 0
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 2.574174035136927
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.9681091453821045
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.6949332546669106
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.6060356492731792
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.5517596581010842,
+      "val_loss": 0.5060269990764844,
+      "val_exact_match": 0.4468937875751503
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.5131249298852623
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.48143331083846186
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.4585279069533943
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.43541403111949745
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.4188883103877596,
+      "val_loss": 0.44466721150364946,
+      "val_exact_match": 0.49579158316633265
+    },
+    {
+      "epoch": 11,
+      "train_loss": 0.40223325383648145
+    },
+    {
+      "epoch": 12,
+      "train_loss": 0.3873705402887168
+    },
+    {
+      "epoch": 13,
+      "train_loss": 0.37359775477454366
+    },
+    {
+      "epoch": 14,
+      "train_loss": 0.36049115586019664
+    },
+    {
+      "epoch": 15,
+      "train_loss": 0.350462260149282,
+      "val_loss": 0.4237846809885717,
+      "val_exact_match": 0.503006012024048
+    },
+    {
+      "epoch": 16,
+      "train_loss": 0.33868032227331385
+    },
+    {
+      "epoch": 17,
+      "train_loss": 0.328217141433931
+    },
+    {
+      "epoch": 18,
+      "train_loss": 0.3181815469823503
+    },
+    {
+      "epoch": 19,
+      "train_loss": 0.3076153161889595
+    },
+    {
+      "epoch": 20,
+      "train_loss": 0.29897884042324707,
+      "val_loss": 0.4123295494446886,
+      "val_exact_match": 0.5198396793587174
+    },
+    {
+      "epoch": 21,
+      "train_loss": 0.28905822657884606
+    },
+    {
+      "epoch": 22,
+      "train_loss": 0.28153068883925947
+    },
+    {
+      "epoch": 23,
+      "train_loss": 0.27307777340201583
+    },
+    {
+      "epoch": 24,
+      "train_loss": 0.26582204352210476
+    },
+    {
+      "epoch": 25,
+      "train_loss": 0.25729739359431836,
+      "val_loss": 0.41379223452460523,
+      "val_exact_match": 0.5298597194388778
+    },
+    {
+      "epoch": 26,
+      "train_loss": 0.24911143125647406
+    },
+    {
+      "epoch": 27,
+      "train_loss": 0.24279483059099116
+    },
+    {
+      "epoch": 28,
+      "train_loss": 0.23569402556355062
+    },
+    {
+      "epoch": 29,
+      "train_loss": 0.22738792324389606
+    },
+    {
+      "epoch": 30,
+      "train_loss": 0.22245872187012497,
+      "val_loss": 0.41887664450008627,
+      "val_exact_match": 0.5406813627254509
+    },
+    {
+      "epoch": 31,
+      "train_loss": 0.2162398507095018
+    },
+    {
+      "epoch": 32,
+      "train_loss": 0.20958060531265627
+    },
+    {
+      "epoch": 33,
+      "train_loss": 0.2052021098209684
+    },
+    {
+      "epoch": 34,
+      "train_loss": 0.19953603261035363
+    },
+    {
+      "epoch": 35,
+      "train_loss": 0.1940345182949814,
+      "val_loss": 0.4326617308542514,
+      "val_exact_match": 0.5490981963927856
+    },
+    {
+      "epoch": 36,
+      "train_loss": 0.18821661928922334
+    },
+    {
+      "epoch": 37,
+      "train_loss": 0.18499287665744923
+    },
+    {
+      "epoch": 38,
+      "train_loss": 0.18043067527910187
+    },
+    {
+      "epoch": 39,
+      "train_loss": 0.1756374477039798
+    },
+    {
+      "epoch": 40,
+      "train_loss": 0.1720691515818832,
+      "val_loss": 0.4374647652376696,
+      "val_exact_match": 0.5539078156312626
+    },
+    {
+      "epoch": 41,
+      "train_loss": 0.1707871404336474
+    },
+    {
+      "epoch": 42,
+      "train_loss": 0.16819320735175014
+    },
+    {
+      "epoch": 43,
+      "train_loss": 0.16525321082394065
+    },
+    {
+      "epoch": 44,
+      "train_loss": 0.16292511838493307
+    },
+    {
+      "epoch": 45,
+      "train_loss": 0.1612036952547076,
+      "val_loss": 0.4398445730041265,
+      "val_exact_match": 0.5535070140280561
+    },
+    {
+      "epoch": 46,
+      "train_loss": 0.16043890102620828
+    },
+    {
+      "epoch": 47,
+      "train_loss": 0.15891850237028549
+    },
+    {
+      "epoch": 48,
+      "train_loss": 0.15815361654939764
+    },
+    {
+      "epoch": 49,
+      "train_loss": 0.1575509324198788
+    },
+    {
+      "epoch": 50,
+      "train_loss": 0.15712364508983434,
+      "val_loss": 0.4397693878402293,
+      "val_exact_match": 0.5547094188376753
+    }
+  ],
+  "best": {
+    "val_em": 0.5547094188376753,
+    "epoch": 50
+  },
+  "val": {
+    "exact_match": 0.5547094188376753,
+    "n": 2495,
+    "per_task": {
+      "1": {
+        "name": "ocr",
+        "n": 2215,
+        "exact_match": 0.5882618510158013,
+        "cer": 0.17373212942061633
+      },
+      "2": {
+        "name": "count_by_type",
+        "n": 105,
+        "exact_match": 0.37142857142857144,
+        "mae": 0.8952380952380953,
+        "unparseable": 0
+      },
+      "4": {
+        "name": "name_types",
+        "n": 90,
+        "exact_match": 0.1111111111111111,
+        "set_f1": 0.7013315696649023
+      },
+      "5": {
+        "name": "count_by_angles",
+        "n": 85,
+        "exact_match": 0.3764705882352941,
+        "mae": 0.8823529411764706,
+        "unparseable": 0
+      }
+    },
+    "per_alpha_bin": {
+      "2": {
+        "range": [
+          0.4,
+          0.6
+        ],
+        "n": 165,
+        "exact_match": 0.4727272727272727,
+        "ocr_em": 0.6588235294117647,
+        "ocr_n": 85,
+        "shape_em": 0.275,
+        "shape_n": 80
+      },
+      "3": {
+        "range": [
+          0.6,
+          0.8
+        ],
+        "n": 388,
+        "exact_match": 0.5103092783505154,
+        "ocr_em": 0.5961538461538461,
+        "ocr_n": 260,
+        "shape_em": 0.3359375,
+        "shape_n": 128
+      },
+      "4": {
+        "range": [
+          0.8,
+          1.0
+        ],
+        "n": 1942,
+        "exact_match": 0.5705458290422245,
+        "ocr_em": 0.5839572192513369,
+        "ocr_n": 1870,
+        "shape_em": 0.2222222222222222,
+        "shape_n": 72
+      }
+    }
+  },
+  "test": {
+    "exact_match": 0.5764799364322606,
+    "n": 2517,
+    "per_task": {
+      "1": {
+        "name": "ocr",
+        "n": 2260,
+        "exact_match": 0.6008849557522123,
+        "cer": 0.16151917404129743
+      },
+      "2": {
+        "name": "count_by_type",
+        "n": 75,
+        "exact_match": 0.5733333333333334,
+        "mae": 0.5333333333333333,
+        "unparseable": 0
+      },
+      "4": {
+        "name": "name_types",
+        "n": 84,
+        "exact_match": 0.17857142857142858,
+        "set_f1": 0.7584716209716204
+      },
+      "5": {
+        "name": "count_by_angles",
+        "n": 98,
+        "exact_match": 0.35714285714285715,
+        "mae": 0.9489795918367347,
+        "unparseable": 0
+      }
+    },
+    "per_alpha_bin": {
+      "2": {
+        "range": [
+          0.4,
+          0.6
+        ],
+        "n": 149,
+        "exact_match": 0.4697986577181208,
+        "ocr_em": 0.5945945945945946,
+        "ocr_n": 74,
+        "shape_em": 0.3466666666666667,
+        "shape_n": 75
+      },
+      "3": {
+        "range": [
+          0.6,
+          0.8
+        ],
+        "n": 401,
+        "exact_match": 0.5286783042394015,
+        "ocr_em": 0.5913978494623656,
+        "ocr_n": 279,
+        "shape_em": 0.38524590163934425,
+        "shape_n": 122
+      },
+      "4": {
+        "range": [
+          0.8,
+          1.0
+        ],
+        "n": 1967,
+        "exact_match": 0.594306049822064,
+        "ocr_em": 0.6025170424750917,
+        "ocr_n": 1907,
+        "shape_em": 0.3333333333333333,
+        "shape_n": 60
+      }
+    }
+  },
+  "test_majority_baseline": {
+    "exact_match": 0.16408422725466826,
+    "n": 2517,
+    "per_task": {
+      "1": {
+        "name": "ocr",
+        "n": 2260,
+        "exact_match": 0.1508849557522124,
+        "cer": 0.8491150442477876
+      },
+      "2": {
+        "name": "count_by_type",
+        "n": 75,
+        "exact_match": 0.5866666666666667,
+        "mae": 0.5333333333333333,
+        "unparseable": 0
+      },
+      "4": {
+        "name": "name_types",
+        "n": 84,
+        "exact_match": 0.05952380952380952,
+        "set_f1": 0.7260977118119968
+      },
+      "5": {
+        "name": "count_by_angles",
+        "n": 98,
+        "exact_match": 0.23469387755102042,
+        "mae": 1.836734693877551,
+        "unparseable": 0
+      }
+    },
+    "per_alpha_bin": {
+      "2": {
+        "range": [
+          0.4,
+          0.6
+        ],
+        "n": 149,
+        "exact_match": 0.21476510067114093,
+        "ocr_em": 0.17567567567567569,
+        "ocr_n": 74,
+        "shape_em": 0.25333333333333335,
+        "shape_n": 75
+      },
+      "3": {
+        "range": [
+          0.6,
+          0.8
+        ],
+        "n": 401,
+        "exact_match": 0.17955112219451372,
+        "ocr_em": 0.12903225806451613,
+        "ocr_n": 279,
+        "shape_em": 0.29508196721311475,
+        "shape_n": 122
+      },
+      "4": {
+        "range": [
+          0.8,
+          1.0
+        ],
+        "n": 1967,
+        "exact_match": 0.15709201830198272,
+        "ocr_em": 0.15312008390141585,
+        "ocr_n": 1907,
+        "shape_em": 0.2833333333333333,
+        "shape_n": 60
+      }
+    }
+  },
+  "examples": [
+    {
+      "image_id": 155000,
+      "alpha": 0.5466,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "IJBFV",
+      "pred": "JFBV"
+    },
+    {
+      "image_id": 155003,
+      "alpha": 0.5877,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "XRYP",
+      "pred": "XRYP"
+    },
+    {
+      "image_id": 155006,
+      "alpha": 1.0,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "WFgMzt",
+      "pred": "WFGmtz"
+    },
+    {
+      "image_id": 155007,
+      "alpha": 1.0,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "wsu",
+      "pred": "wsu"
+    },
+    {
+      "image_id": 155008,
+      "alpha": 0.9306,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "opviby",
+      "pred": "opiivy"
+    },
+    {
+      "image_id": 155009,
+      "alpha": 0.9984,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "detl",
+      "pred": "detl"
+    },
+    {
+      "image_id": 155011,
+      "alpha": 0.7994,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "ocrzwr",
+      "pred": "orcziw"
+    },
+    {
+      "image_id": 155012,
+      "alpha": 0.9945,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "cezmic",
+      "pred": "cezcmk"
+    },
+    {
+      "image_id": 155013,
+      "alpha": 0.506,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "MTpyZs",
+      "pred": "MTPyZS"
+    },
+    {
+      "image_id": 155017,
+      "alpha": 0.5885,
+      "task_id": 5,
+      "question": "How many shapes have at least 6 angles?",
+      "gold": "0",
+      "pred": "0"
+    },
+    {
+      "image_id": 155021,
+      "alpha": 0.9981,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "tldzd",
+      "pred": "tldzd"
+    },
+    {
+      "image_id": 155025,
+      "alpha": 0.7808,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "dsKgq",
+      "pred": "dskgq"
+    },
+    {
+      "image_id": 155028,
+      "alpha": 0.9998,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "KQLTX",
+      "pred": "KQLTX"
+    },
+    {
+      "image_id": 155030,
+      "alpha": 1.0,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "TTV",
+      "pred": "TVT"
+    },
+    {
+      "image_id": 155038,
+      "alpha": 0.9122,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "yoZxS",
+      "pred": "yozxs"
+    },
+    {
+      "image_id": 155039,
+      "alpha": 1.0,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "algTKN",
+      "pred": "atlkqn"
+    },
+    {
+      "image_id": 155042,
+      "alpha": 0.9982,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "llZrjY",
+      "pred": "lzryy"
+    },
+    {
+      "image_id": 155043,
+      "alpha": 1.0,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "biqua",
+      "pred": "biqua"
+    },
+    {
+      "image_id": 155046,
+      "alpha": 0.908,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "",
+      "pred": ""
+    },
+    {
+      "image_id": 155047,
+      "alpha": 0.5219,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "wlkak",
+      "pred": "wlkak"
+    },
+    {
+      "image_id": 155050,
+      "alpha": 0.7601,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "AWPznr",
+      "pred": "awznpr"
+    },
+    {
+      "image_id": 155051,
+      "alpha": 0.966,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "",
+      "pred": ""
+    },
+    {
+      "image_id": 155052,
+      "alpha": 0.526,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "bdzxc",
+      "pred": "bdxz"
+    },
+    {
+      "image_id": 155055,
+      "alpha": 0.7328,
+      "task_id": 5,
+      "question": "How many shapes have at least 6 angles?",
+      "gold": "1",
+      "pred": "0"
+    },
+    {
+      "image_id": 155056,
+      "alpha": 0.7087,
+      "task_id": 1,
+      "question": "Recognise text on the image.",
+      "gold": "psr",
+      "pred": "psr"
+    }
+  ],
+  "world_size": 1,
+  "effective_batch_size": 64
+}

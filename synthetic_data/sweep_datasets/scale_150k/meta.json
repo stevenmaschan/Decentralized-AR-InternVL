@@ -1,0 +1,9 @@
+{
+  "synthetic_shapes": {
+    "root": "synthetic_data/sweep_datasets/scale_150k/",
+    "annotation": "synthetic_data/sweep_datasets/scale_150k/annotations.jsonl",
+    "data_augment": false,
+    "repeat_time": 1,
+    "length": 160000
+  }
+}

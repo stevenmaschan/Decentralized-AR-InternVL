@@ -301,13 +301,18 @@ def plot_tsne_clustering(
         tsne_embedding = tsne.fit(sampled_features_normalized)
         sample_coords = np.array(tsne_embedding)
     else:
-        # sklearn TSNE (doesn't support metric="cosine" directly, uses euclidean)
+        # sklearn TSNE (doesn't support metric="cosine" directly, uses euclidean).
+        # sklearn renamed n_iter -> max_iter in 1.5, so pick whichever this
+        # version accepts.
+        import inspect
+        iter_kw = ('max_iter' if 'max_iter' in inspect.signature(TSNE.__init__).parameters
+                   else 'n_iter')
         tsne = TSNE(
             n_components=2,
             perplexity=min(perplexity, len(sampled_features_normalized) - 1),
             random_state=random_state,
-            n_iter=1000,
-            verbose=1
+            verbose=1,
+            **{iter_kw: 1000}
         )
         sample_coords = tsne.fit_transform(sampled_features_normalized)
     

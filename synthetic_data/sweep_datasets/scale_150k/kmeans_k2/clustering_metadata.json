@@ -1,0 +1,16 @@
+{
+  "n_clusters": 2,
+  "n_samples": 160000,
+  "feature_dim": 512,
+  "device": "cuda:0",
+  "iter_limit": 100,
+  "cluster_sizes": [
+    80000,
+    80000
+  ],
+  "clustering_method": "single-stage spherical balanced k-means",
+  "distance_metric": "cosine",
+  "mean_subtracted": true,
+  "mean_norm": 8.504359245300293,
+  "mean_file": "clustering_global_mean.npy"
+}
